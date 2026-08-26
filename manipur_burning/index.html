@@ -1,3258 +1,4202 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- KEEPING YOUR FAVICON -->
-    <link rel="icon" type="image/x-icon" href="manipur_voilence.webp" />
+  <!-- KEEPING YOUR FAVICON -->
+  <link rel="icon" type="image/x-icon" href="manipur_voilence.webp">
 
-    <meta
-      name="description"
-      content="MANIPUR — A living documentary about violence, memory and accountability."
-    />
+  <meta
+    name="description"
+    content="MANIPUR — A living documentary about violence, memory and accountability."
+  />
 
-    <title>MANIPUR — A Living Documentary</title>
+  <title>MANIPUR — A Living Documentary</title>
 
-    <!-- =========================================================
+  <!-- =========================================================
        FONTS
   ========================================================== -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
 
-    <style>
-      /* =========================================================
+  <style>
+
+    /* =========================================================
        RESET
     ========================================================== */
 
-      *,
-      *::before,
-      *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      html {
-        scroll-behavior: smooth;
-        background: #050505;
-      }
+    html {
+      scroll-behavior: smooth;
+      background: #050505;
+    }
 
-      body {
-        background: #050505;
-        color: #eee8df;
-        font-family: "DM Sans", sans-serif;
-        overflow-x: hidden;
-        min-height: 100%;
-        isolation: isolate;
-      }
+    body {
+      background: #050505;
+      color: #eee8df;
+      font-family: "DM Sans", sans-serif;
+      overflow-x: hidden;
+      min-height: 100%;
+      isolation: isolate;
+    }
 
-      img {
-        display: block;
-        max-width: 100%;
-      }
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
-      button,
-      a {
-        font: inherit;
-      }
+    button,
+    a {
+      font: inherit;
+    }
 
-      ::selection {
-        background: rgba(255, 83, 35, 0.35);
-        color: #fff;
-      }
+    ::selection {
+      background: rgba(255, 83, 35, 0.35);
+      color: #fff;
+    }
 
-      /* =========================================================
+    /* =========================================================
        VARIABLES
     ========================================================== */
 
-      :root {
-        --black: #050505;
-        --deep: #090706;
+    :root {
+      --black: #050505;
+      --deep: #090706;
 
-        --red: #8d1f16;
-        --red2: #c13a20;
+      --red: #8d1f16;
+      --red2: #c13a20;
 
-        --orange: #ff6427;
-        --ember: #ff9d3d;
+      --orange: #ff6427;
+      --ember: #ff9d3d;
 
-        --gold: #c8a66a;
+      --gold: #c8a66a;
 
-        --white: #f2eee7;
-        --muted: #98908a;
+      --white: #f2eee7;
+      --muted: #98908a;
 
-        --text: #aaa29b;
-        --dim: #746d68;
+      --text: #aaa29b;
+      --dim: #746d68;
 
-        --glass: rgba(255, 255, 255, 0.045);
-        --glass-border: rgba(255, 255, 255, 0.1);
+      --glass: rgba(255, 255, 255, 0.045);
+      --glass-border: rgba(255, 255, 255, 0.1);
 
-        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
-        --content-width: 1180px;
-      }
+      --content-width: 1180px;
+    }
 
-      /* =========================================================
+    /* =========================================================
        THREE.JS BACKGROUND
-
-       IMPORTANT:
-       Positive z-index is intentional.
-       Negative z-index can place the canvas behind the body's
-       background in some browsers/mobile rendering situations.
     ========================================================== */
 
-      #three-bg {
-        position: fixed;
-        inset: 0;
+    #three-bg {
+      position: fixed;
 
-        width: 100%;
-        height: 100%;
+      inset: 0;
 
-        z-index: 0;
+      width: 100%;
+      height: 100%;
 
-        pointer-events: none;
+      z-index: 0;
 
-        display: block;
+      pointer-events: none;
 
-        opacity: 0.96;
-      }
+      display: block;
 
-      /* =========================================================
+      opacity: 0.96;
+    }
+
+    /* =========================================================
        ATMOSPHERE
     ========================================================== */
 
-      .atmosphere {
-        position: fixed;
-        inset: 0;
+    .atmosphere {
+      position: fixed;
+      inset: 0;
 
-        z-index: 1;
+      z-index: 1;
 
-        pointer-events: none;
+      pointer-events: none;
 
-        background:
-          radial-gradient(
-            circle at 50% 100%,
-            rgba(163, 38, 17, 0.3),
-            transparent 38%
-          ),
-          radial-gradient(
-            circle at 20% 60%,
-            rgba(108, 22, 14, 0.16),
-            transparent 40%
-          ),
-          radial-gradient(
-            circle at 80% 20%,
-            rgba(204, 84, 25, 0.055),
-            transparent 35%
-          );
+      background:
+        radial-gradient(
+          circle at 50% 100%,
+          rgba(163, 38, 17, 0.30),
+          transparent 38%
+        ),
+        radial-gradient(
+          circle at 20% 60%,
+          rgba(108, 22, 14, 0.16),
+          transparent 40%
+        ),
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(204, 84, 25, 0.055),
+          transparent 35%
+        );
 
-        animation: breathingAtmosphere 8s ease-in-out infinite alternate;
+      animation:
+        breathingAtmosphere
+        8s
+        ease-in-out
+        infinite
+        alternate;
+    }
+
+    @keyframes breathingAtmosphere {
+      0% {
+        opacity: 0.62;
+        transform: scale(1);
       }
 
-      @keyframes breathingAtmosphere {
-        0% {
-          opacity: 0.62;
-          transform: scale(1);
-        }
-
-        100% {
-          opacity: 1;
-          transform: scale(1.045);
-        }
+      100% {
+        opacity: 1;
+        transform: scale(1.045);
       }
+    }
 
-      /* =========================================================
+    /* =========================================================
        SMOKE
     ========================================================== */
 
-      .smoke {
-        position: fixed;
+    .smoke {
+      position: fixed;
 
-        width: 80vw;
-        height: 35vh;
+      width: 80vw;
+      height: 35vh;
 
-        left: 10%;
-        bottom: -10%;
+      left: 10%;
+      bottom: -10%;
 
-        background: radial-gradient(
+      background:
+        radial-gradient(
           ellipse,
           rgba(115, 115, 115, 0.08),
           transparent 70%
         );
 
-        filter: blur(45px);
+      filter: blur(45px);
 
-        opacity: 0.48;
+      opacity: 0.48;
 
-        animation: smokeMove 15s ease-in-out infinite alternate;
+      animation:
+        smokeMove
+        15s
+        ease-in-out
+        infinite
+        alternate;
 
-        pointer-events: none;
+      pointer-events: none;
 
-        z-index: 2;
+      z-index: 2;
+    }
+
+    @keyframes smokeMove {
+      from {
+        transform:
+          translate3d(-8%, 0, 0)
+          scale(1);
       }
 
-      @keyframes smokeMove {
-        from {
-          transform: translate3d(-8%, 0, 0) scale(1);
-        }
-
-        to {
-          transform: translate3d(8%, -20%, 0) scale(1.2);
-        }
+      to {
+        transform:
+          translate3d(8%, -20%, 0)
+          scale(1.2);
       }
+    }
 
-      /* =========================================================
+    /* =========================================================
        FIRE GLOW
     ========================================================== */
 
-      .fire-glow {
-        position: fixed;
+    .fire-glow {
+      position: fixed;
 
-        left: 50%;
-        bottom: -260px;
+      left: 50%;
+      bottom: -260px;
 
-        width: 900px;
-        height: 500px;
+      width: 900px;
+      height: 500px;
 
-        transform: translateX(-50%);
+      transform: translateX(-50%);
 
-        background: radial-gradient(
+      background:
+        radial-gradient(
           ellipse,
           rgba(255, 75, 20, 0.28),
-          rgba(130, 22, 10, 0.1) 40%,
+          rgba(130, 22, 10, 0.10) 40%,
           transparent 70%
         );
 
-        filter: blur(35px);
+      filter: blur(35px);
 
-        animation: fireBreath 3s ease-in-out infinite alternate;
+      animation:
+        fireBreath
+        3s
+        ease-in-out
+        infinite
+        alternate;
 
-        z-index: 2;
+      z-index: 2;
 
-        pointer-events: none;
+      pointer-events: none;
+    }
+
+    @keyframes fireBreath {
+      from {
+        transform:
+          translateX(-50%)
+          scale(0.92);
+
+        opacity: 0.6;
       }
 
-      @keyframes fireBreath {
-        from {
-          transform: translateX(-50%) scale(0.92);
+      to {
+        transform:
+          translateX(-50%)
+          scale(1.12);
 
-          opacity: 0.6;
-        }
-
-        to {
-          transform: translateX(-50%) scale(1.12);
-
-          opacity: 1;
-        }
+        opacity: 1;
       }
+    }
 
-      /* =========================================================
+    /* =========================================================
        GRAIN
     ========================================================== */
 
-      .grain {
-        position: fixed;
+    .grain {
+      position: fixed;
 
-        inset: -50%;
+      inset: -50%;
 
-        z-index: 100;
+      z-index: 100;
 
-        pointer-events: none;
+      pointer-events: none;
 
-        opacity: 0.045;
+      opacity: 0.045;
 
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 
-        animation: grainMove 0.2s steps(2) infinite;
+      animation:
+        grainMove
+        0.2s
+        steps(2)
+        infinite;
+    }
+
+    @keyframes grainMove {
+      0% {
+        transform: translate(0, 0);
       }
 
-      @keyframes grainMove {
-        0% {
-          transform: translate(0, 0);
-        }
-
-        25% {
-          transform: translate(2%, -2%);
-        }
-
-        50% {
-          transform: translate(-2%, 1%);
-        }
-
-        75% {
-          transform: translate(1%, 2%);
-        }
-
-        100% {
-          transform: translate(-1%, -1%);
-        }
+      25% {
+        transform: translate(2%, -2%);
       }
 
-      /* =========================================================
+      50% {
+        transform: translate(-2%, 1%);
+      }
+
+      75% {
+        transform: translate(1%, 2%);
+      }
+
+      100% {
+        transform: translate(-1%, -1%);
+      }
+    }
+
+    /* =========================================================
        CURSOR
     ========================================================== */
 
-      .cursor-glow {
-        position: fixed;
+    .cursor-glow {
+      position: fixed;
 
-        width: 280px;
-        height: 280px;
+      width: 280px;
+      height: 280px;
 
-        border-radius: 50%;
+      border-radius: 50%;
 
-        background: radial-gradient(
+      background:
+        radial-gradient(
           circle,
-          rgba(255, 92, 35, 0.1),
+          rgba(255, 92, 35, 0.10),
           transparent 65%
         );
 
-        transform: translate(-50%, -50%);
+      transform:
+        translate(-50%, -50%);
 
-        pointer-events: none;
+      pointer-events: none;
 
-        z-index: 98;
+      z-index: 98;
 
-        mix-blend-mode: screen;
-      }
+      mix-blend-mode: screen;
+    }
 
-      /* =========================================================
+    /* =========================================================
        NAV
     ========================================================== */
 
-      .nav {
-        position: fixed;
+    .nav {
+      position: fixed;
 
-        top: 0;
-        left: 0;
-        right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
 
-        height: 76px;
+      height: 76px;
 
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-        padding: 0 max(5vw, 24px);
+      padding:
+        0
+        max(5vw, 24px);
 
-        z-index: 50;
+      z-index: 50;
 
-        background: linear-gradient(
+      background:
+        linear-gradient(
           to bottom,
           rgba(3, 3, 3, 0.86),
           transparent
         );
 
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      font-size: 0.7rem;
+
+      letter-spacing: 0.35em;
+
+      font-weight: 600;
+
+      color: #eee;
+    }
+
+    .logo span {
+      color: var(--orange);
+    }
+
+    .nav-status {
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      font-size: 0.6rem;
+
+      letter-spacing: 0.2em;
+
+      text-transform: uppercase;
+
+      color: #aaa29b;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: #ff4827;
+
+      box-shadow:
+        0 0 10px #ff4827,
+        0 0 25px rgba(255, 72, 39, 0.7);
+
+      animation:
+        pulse
+        1.5s
+        infinite;
+    }
+
+    @keyframes pulse {
+      0%,
+      100% {
+        opacity: 0.4;
+        transform: scale(0.8);
       }
 
-      .logo {
-        font-size: 0.7rem;
-
-        letter-spacing: 0.35em;
-
-        font-weight: 600;
-
-        color: #eee;
+      50% {
+        opacity: 1;
+        transform: scale(1.2);
       }
+    }
 
-      .logo span {
-        color: var(--orange);
-      }
-
-      .nav-status {
-        display: flex;
-
-        align-items: center;
-
-        gap: 10px;
-
-        font-size: 0.6rem;
-
-        letter-spacing: 0.2em;
-
-        text-transform: uppercase;
-
-        color: #8d8781;
-      }
-
-      .status-dot {
-        width: 6px;
-        height: 6px;
-
-        border-radius: 50%;
-
-        background: #ff4827;
-
-        box-shadow:
-          0 0 10px #ff4827,
-          0 0 25px rgba(255, 72, 39, 0.7);
-
-        animation: pulse 1.5s infinite;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 0.4;
-          transform: scale(0.8);
-        }
-
-        50% {
-          opacity: 1;
-          transform: scale(1.2);
-        }
-      }
-
-      /* =========================================================
+    /* =========================================================
        PROGRESS
     ========================================================== */
 
-      .progress {
-        position: fixed;
+    .progress {
+      position: fixed;
 
-        top: 0;
-        left: 0;
+      top: 0;
+      left: 0;
 
-        width: 0%;
+      width: 0%;
 
-        height: 2px;
+      height: 2px;
 
-        background: linear-gradient(90deg, #7e160f, #ff6a25, #ffc36a);
+      background:
+        linear-gradient(
+          90deg,
+          #7e160f,
+          #ff6a25,
+          #ffc36a
+        );
 
-        z-index: 101;
+      z-index: 101;
 
-        box-shadow: 0 0 15px #ff4b23;
-      }
+      box-shadow:
+        0 0 15px #ff4b23;
+    }
 
-      /* =========================================================
+    /* =========================================================
        CHAPTERS
     ========================================================== */
 
-      .chapters {
-        position: fixed;
+    .chapters {
+      position: fixed;
 
-        right: 28px;
-        top: 50%;
+      right: 28px;
+      top: 50%;
 
-        transform: translateY(-50%);
+      transform:
+        translateY(-50%);
 
-        z-index: 30;
+      z-index: 30;
 
-        display: flex;
+      display: flex;
 
-        flex-direction: column;
+      flex-direction: column;
 
-        gap: 18px;
-      }
+      gap: 18px;
+    }
 
-      .chapter {
-        width: 7px;
-        height: 7px;
+    .chapter {
+      width: 7px;
+      height: 7px;
 
-        border-radius: 50%;
+      border-radius: 50%;
 
-        background: #555;
+      background: #555;
 
-        cursor: pointer;
+      cursor: pointer;
 
-        transition: 0.4s var(--ease);
+      transition:
+        0.4s
+        var(--ease);
 
-        position: relative;
-      }
+      position: relative;
+    }
 
-      .chapter::after {
-        content: attr(data-label);
+    .chapter::after {
+      content: attr(data-label);
 
-        position: absolute;
+      position: absolute;
 
-        right: 18px;
-        top: 50%;
+      right: 18px;
+      top: 50%;
 
-        transform: translateY(-50%) translateX(8px);
+      transform:
+        translateY(-50%)
+        translateX(8px);
 
-        white-space: nowrap;
+      white-space: nowrap;
 
-        font-size: 0.58rem;
+      font-size: 0.58rem;
 
-        letter-spacing: 0.15em;
+      letter-spacing: 0.15em;
 
-        text-transform: uppercase;
+      text-transform: uppercase;
 
-        color: #aaa;
+      color: #aaa;
 
-        opacity: 0;
+      opacity: 0;
 
-        transition: 0.3s;
-      }
+      transition: 0.3s;
+    }
 
-      .chapter:hover::after {
-        opacity: 1;
+    .chapter:hover::after {
+      opacity: 1;
 
-        transform: translateY(-50%) translateX(0);
-      }
+      transform:
+        translateY(-50%)
+        translateX(0);
+    }
 
-      .chapter.active {
-        background: var(--orange);
+    .chapter.active {
+      background: var(--orange);
 
-        box-shadow:
-          0 0 10px var(--orange),
-          0 0 25px rgba(255, 80, 30, 0.6);
+      box-shadow:
+        0 0 10px var(--orange),
+        0 0 25px rgba(255, 80, 30, 0.6);
 
-        transform: scale(1.6);
-      }
+      transform: scale(1.6);
+    }
 
-      /* =========================================================
+    /* =========================================================
        MAIN STACK
     ========================================================== */
 
-      main {
-        position: relative;
+    main {
+      position: relative;
 
-        z-index: 5;
+      z-index: 5;
 
-        overflow: hidden;
-      }
+      overflow: hidden;
+    }
 
-      .container {
-        width: min(var(--content-width), calc(100vw - 80px));
+    .container {
+      width: min(
+        var(--content-width),
+        calc(100vw - 80px)
+      );
 
-        margin-inline: auto;
-      }
+      margin-inline: auto;
+    }
 
-      /* =========================================================
+    /* =========================================================
        COMMON TYPOGRAPHY
     ========================================================== */
 
-      .section-number,
-      .kicker,
-      .final-small,
-      .source,
-      .event-date,
-      .court-date,
-      .q-number {
-        font-family: "DM Sans", sans-serif;
-      }
+    .section-number,
+    .kicker,
+    .final-small,
+    .source,
+    .event-date,
+    .court-date,
+    .q-number {
+      font-family: "DM Sans", sans-serif;
+    }
 
-      h1,
-      h2,
-      h3,
-      .date-big,
-      .year,
-      .human-word,
-      .number,
-      .hero-date {
-        font-family: "Cormorant Garamond", serif;
-      }
+    h1,
+    h2,
+    h3,
+    .date-big,
+    .year,
+    .human-word,
+    .number,
+    .hero-date {
+      font-family: "Cormorant Garamond", serif;
+    }
 
-      /* =========================================================
+    /* =========================================================
        HERO
     ========================================================== */
 
-      .hero {
-        min-height: 100svh;
+    .hero {
+      min-height: 100svh;
 
-        display: flex;
+      display: flex;
 
-        align-items: center;
+      align-items: center;
 
-        justify-content: center;
+      justify-content: center;
 
-        position: relative;
+      position: relative;
 
-        padding: 120px 0 100px;
+      padding:
+        120px
+        0
+        100px;
 
-        text-align: center;
-      }
+      text-align: center;
+    }
 
-      .hero .container {
-        display: flex;
+    .hero .container {
+      display: flex;
 
-        justify-content: center;
+      justify-content: center;
 
-        width: min(1180px, calc(100vw - 60px));
-      }
+      width: min(
+        1180px,
+        calc(100vw - 60px)
+      );
+    }
 
-      .hero-inner {
-        position: relative;
+    .hero-inner {
+      position: relative;
 
-        width: 100%;
+      width: 100%;
 
-        max-width: 1120px;
+      max-width: 1120px;
 
-        margin-inline: auto;
+      margin-inline: auto;
 
-        display: flex;
+      display: flex;
 
-        flex-direction: column;
+      flex-direction: column;
 
-        align-items: center;
-      }
+      align-items: center;
+    }
 
-      .kicker {
-        display: flex;
+    .kicker {
+      display: flex;
 
-        align-items: center;
+      align-items: center;
 
-        justify-content: center;
+      justify-content: center;
 
-        gap: 14px;
+      gap: 14px;
 
-        margin-bottom: 28px;
+      margin-bottom: 28px;
 
-        font-size: 0.62rem;
+      font-size: 0.62rem;
 
-        letter-spacing: 0.3em;
+      letter-spacing: 0.3em;
 
-        text-transform: uppercase;
+      text-transform: uppercase;
 
-        color: #b9afa5;
+      color: #d0c8c0;
 
-        text-align: center;
-      }
+      text-align: center;
+    }
 
-      .kicker-line {
-        width: 42px;
-        height: 1px;
+    .kicker-line {
+      width: 42px;
+      height: 1px;
 
-        flex: 0 0 auto;
+      flex: 0 0 auto;
 
-        background: var(--orange);
+      background: var(--orange);
 
-        box-shadow: 0 0 10px var(--orange);
-      }
+      box-shadow:
+        0 0 10px var(--orange);
+    }
 
-      .hero h1 {
-        font-size: clamp(5.5rem, 15vw, 13.5rem);
+    .hero h1 {
+      font-size:
+        clamp(
+          5.5rem,
+          15vw,
+          13.5rem
+        );
 
-        line-height: 0.76;
+      line-height: 0.76;
 
-        letter-spacing: -0.075em;
+      letter-spacing: -0.075em;
 
-        font-weight: 600;
+      font-weight: 600;
 
-        color: #eee8df;
+      color: #eee8df;
 
-        text-shadow: 0 10px 60px rgba(0, 0, 0, 0.8);
+      text-shadow:
+        0 10px 60px rgba(0, 0, 0, 0.8);
 
-        position: relative;
+      position: relative;
 
-        transition: transform 0.15s linear;
-      }
+      transition:
+        transform 0.15s linear;
+    }
 
-      .hero h1 .burn {
-        color: #ff5a29;
+    .hero h1 .burn {
+      color: #ff5a29;
 
-        text-shadow:
-          0 0 30px rgba(255, 70, 20, 0.35),
-          0 0 80px rgba(255, 40, 10, 0.18);
-      }
+      text-shadow:
+        0 0 30px rgba(255, 70, 20, 0.35),
+        0 0 80px rgba(255, 40, 10, 0.18);
+    }
 
-      .hero-subtitle {
-        margin-top: 42px;
+    .hero-subtitle {
+      margin-top: 42px;
 
-        width: min(620px, 100%);
+      width: min(620px, 100%);
 
-        font-family: "Cormorant Garamond", serif;
+      font-family: "Cormorant Garamond", serif;
 
-        font-size: clamp(1.25rem, 2vw, 1.65rem);
+      font-size:
+        clamp(
+          1.25rem,
+          2vw,
+          1.65rem
+        );
 
-        line-height: 1.42;
+      line-height: 1.42;
 
-        color: #aaa29b;
+      color: #c0b8b0;
 
-        font-weight: 400;
+      font-weight: 400;
 
-        text-align: center;
-      }
+      text-align: center;
 
-      .hero-subtitle strong {
-        color: #eee;
+      text-shadow:
+        0 1px 12px rgba(0, 0, 0, 0.45);
+    }
 
-        font-weight: 600;
-      }
+    .hero-subtitle strong {
+      color: #fff;
 
-      .hero-date {
-        position: absolute;
+      font-weight: 600;
+    }
 
-        right: -20px;
-        bottom: -15px;
+    .hero-date {
+      position: absolute;
 
-        font-size: clamp(4rem, 8vw, 7rem);
+      right: -20px;
+      bottom: -15px;
 
-        color: rgba(255, 255, 255, 0.035);
+      font-size:
+        clamp(
+          4rem,
+          8vw,
+          7rem
+        );
 
-        font-weight: 700;
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          0.045
+        );
 
-        pointer-events: none;
+      font-weight: 700;
 
-        white-space: nowrap;
-      }
+      pointer-events: none;
 
-      /* =========================================================
+      white-space: nowrap;
+    }
+
+    /* =========================================================
        SCROLL INDICATOR
     ========================================================== */
 
-      .scroll-indicator {
-        position: absolute;
+    .scroll-indicator {
+      position: absolute;
 
-        bottom: 30px;
-        left: 50%;
+      bottom: 30px;
+      left: 50%;
 
-        transform: translateX(-50%);
+      transform:
+        translateX(-50%);
 
-        display: flex;
+      display: flex;
 
-        flex-direction: column;
+      flex-direction: column;
 
-        align-items: center;
+      align-items: center;
 
-        gap: 10px;
+      gap: 10px;
 
-        color: #777;
+      color: #9a928b;
 
-        font-size: 0.55rem;
+      font-size: 0.55rem;
 
-        letter-spacing: 0.25em;
+      letter-spacing: 0.25em;
 
-        text-transform: uppercase;
+      text-transform: uppercase;
 
-        white-space: nowrap;
+      white-space: nowrap;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 55px;
+
+      background:
+        linear-gradient(
+          to bottom,
+          transparent,
+          var(--orange)
+        );
+
+      animation:
+        scrollLine
+        2s
+        infinite;
+    }
+
+    @keyframes scrollLine {
+      0% {
+        transform: scaleY(0);
+        transform-origin: top;
       }
 
-      .scroll-line {
-        width: 1px;
-        height: 55px;
-
-        background: linear-gradient(to bottom, transparent, var(--orange));
-
-        animation: scrollLine 2s infinite;
+      50% {
+        transform: scaleY(1);
+        transform-origin: top;
       }
 
-      @keyframes scrollLine {
-        0% {
-          transform: scaleY(0);
-          transform-origin: top;
-        }
-
-        50% {
-          transform: scaleY(1);
-          transform-origin: top;
-        }
-
-        51% {
-          transform-origin: bottom;
-        }
-
-        100% {
-          transform: scaleY(0);
-          transform-origin: bottom;
-        }
+      51% {
+        transform-origin: bottom;
       }
 
-      /* =========================================================
+      100% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+      }
+    }
+
+    /* =========================================================
        GENERAL SECTIONS
     ========================================================== */
 
-      .section {
-        min-height: auto;
+    .section {
+      min-height: auto;
 
-        padding: 115px 0;
+      padding:
+        115px
+        0;
 
-        position: relative;
+      position: relative;
 
-        opacity: 0;
+      opacity: 0;
 
-        transform: translateY(50px);
+      transform:
+        translateY(50px);
 
-        transition:
-          opacity 1s var(--ease),
-          transform 1s var(--ease);
-      }
+      transition:
+        opacity 1s var(--ease),
+        transform 1s var(--ease);
+    }
 
-      .section.visible {
-        opacity: 1;
+    .section.visible {
+      opacity: 1;
 
-        transform: none;
-      }
+      transform: none;
+    }
 
-      .section > .container {
-        display: flex;
+    .section > .container {
+      display: flex;
 
-        flex-direction: column;
+      flex-direction: column;
 
-        align-items: center;
+      align-items: center;
 
-        text-align: center;
-      }
+      text-align: center;
+    }
 
-      .section-number {
-        font-size: 0.58rem;
+    .section-number {
+      font-size: 0.58rem;
 
-        letter-spacing: 0.35em;
+      letter-spacing: 0.35em;
 
-        text-transform: uppercase;
+      text-transform: uppercase;
 
-        color: var(--orange);
+      color: var(--orange);
 
-        margin-bottom: 20px;
+      margin-bottom: 20px;
 
-        display: flex;
+      display: flex;
 
-        align-items: center;
+      align-items: center;
 
-        justify-content: center;
+      justify-content: center;
 
-        gap: 15px;
-      }
+      gap: 15px;
+    }
 
-      .section-number::before {
-        content: "";
+    .section-number::before {
+      content: "";
 
-        width: 25px;
-        height: 1px;
+      width: 25px;
+      height: 1px;
 
-        background: var(--orange);
-      }
+      background: var(--orange);
+    }
 
-      .section h2 {
-        font-family: "Cormorant Garamond", serif;
+    .section h2 {
+      font-family: "Cormorant Garamond", serif;
 
-        font-size: clamp(4rem, 7vw, 7.2rem);
+      font-size:
+        clamp(
+          4rem,
+          7vw,
+          7.2rem
+        );
 
-        line-height: 0.86;
+      line-height: 0.86;
 
-        letter-spacing: -0.055em;
+      letter-spacing: -0.055em;
 
-        max-width: 950px;
+      max-width: 950px;
 
-        margin-bottom: 32px;
+      margin-bottom: 32px;
 
-        font-weight: 600;
-      }
+      font-weight: 600;
+    }
 
-      .section h2 span {
-        color: var(--orange);
-      }
+    .section h2 span {
+      color: var(--orange);
+    }
 
-      .section-intro {
-        width: min(680px, 100%);
+    .section-intro {
+      width: min(680px, 100%);
 
-        margin-inline: auto;
+      margin-inline: auto;
 
-        font-family: "Cormorant Garamond", serif;
+      font-family: "Cormorant Garamond", serif;
 
-        font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+      font-size:
+        clamp(
+          1.15rem,
+          1.8vw,
+          1.4rem
+        );
 
-        line-height: 1.65;
+      line-height: 1.65;
 
-        color: #9c958e;
+      color: #b8afa7;
 
-        font-weight: 400;
+      font-weight: 400;
 
-        text-align: center;
-      }
+      text-align: center;
 
-      /* =========================================================
+      text-shadow:
+        0 1px 12px rgba(0, 0, 0, 0.45);
+    }
+
+    /* =========================================================
        GLASS
     ========================================================== */
 
-      .glass {
-        background: linear-gradient(
+    .glass {
+      background:
+        linear-gradient(
           135deg,
           rgba(255, 255, 255, 0.065),
           rgba(255, 255, 255, 0.022)
         );
 
-        border: 1px solid rgba(255, 255, 255, 0.09);
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.09);
 
-        box-shadow:
-          0 30px 80px rgba(0, 0, 0, 0.45),
-          inset 0 1px 0 rgba(255, 255, 255, 0.07);
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
 
-        backdrop-filter: blur(20px) saturate(120%);
+      backdrop-filter:
+        blur(20px)
+        saturate(120%);
 
-        -webkit-backdrop-filter: blur(20px) saturate(120%);
+      -webkit-backdrop-filter:
+        blur(20px)
+        saturate(120%);
 
-        border-radius: 24px;
+      border-radius: 24px;
 
-        position: relative;
+      position: relative;
 
-        overflow: hidden;
-      }
+      overflow: hidden;
+    }
 
-      .glass::before {
-        content: "";
+    .glass::before {
+      content: "";
 
-        position: absolute;
+      position: absolute;
 
-        inset: 0;
+      inset: 0;
 
-        background: linear-gradient(
+      background:
+        linear-gradient(
           120deg,
           transparent 30%,
           rgba(255, 255, 255, 0.055),
           transparent 70%
         );
 
-        transform: translateX(-120%);
+      transform:
+        translateX(-120%);
 
-        transition: 1.2s;
+      transition: 1.2s;
 
-        pointer-events: none;
-      }
+      pointer-events: none;
+    }
 
-      .glass:hover::before {
-        transform: translateX(120%);
-      }
+    .glass:hover::before {
+      transform:
+        translateX(120%);
+    }
 
-      /* =========================================================
+    /* =========================================================
        BEFORE
     ========================================================== */
 
-      .before-layout {
-        width: min(1000px, 100%);
+    .before-layout {
+      width: min(1000px, 100%);
 
-        display: grid;
+      display: grid;
 
-        grid-template-columns:
-          0.8fr
-          1.2fr;
+      grid-template-columns:
+        0.8fr
+        1.2fr;
 
-        gap: 70px;
+      gap: 70px;
 
-        margin-top: 65px;
+      margin-top: 65px;
 
-        align-items: center;
+      align-items: center;
 
-        text-align: center;
-      }
+      text-align: center;
+    }
 
-      .before-layout > div {
-        display: flex;
+    .before-layout > div {
+      display: flex;
 
-        flex-direction: column;
+      flex-direction: column;
 
-        align-items: center;
-      }
+      align-items: center;
+    }
 
-      .year {
-        font-size: 5.5rem;
+    .year {
+      font-size: 5.5rem;
 
-        color: rgba(255, 255, 255, 0.12);
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          0.18
+        );
 
-        line-height: 0.9;
+      line-height: 0.9;
 
-        margin-bottom: 20px;
-      }
+      margin-bottom: 20px;
+    }
 
-      .event {
-        width: 100%;
+    .event {
+      width: 100%;
 
-        padding: 28px;
+      padding: 28px;
 
-        margin-bottom: 16px;
+      margin-bottom: 16px;
 
-        transition: 0.5s var(--ease);
+      transition:
+        0.5s
+        var(--ease);
 
-        cursor: default;
+      cursor: default;
 
-        text-align: center;
-      }
+      text-align: center;
+    }
 
-      .event:hover {
-        transform: translateY(-5px);
+    .event:hover {
+      transform:
+        translateY(-5px);
 
-        border-color: rgba(255, 105, 40, 0.3);
-      }
+      border-color:
+        rgba(
+          255,
+          105,
+          40,
+          0.3
+        );
+    }
 
-      .event-date {
-        font-size: 0.58rem;
+    .event-date {
+      font-size: 0.58rem;
 
-        letter-spacing: 0.2em;
+      letter-spacing: 0.2em;
 
-        color: var(--orange);
+      color: var(--orange);
 
-        margin-bottom: 8px;
-      }
+      margin-bottom: 8px;
+    }
 
-      .event-title {
-        font-family: "Cormorant Garamond", serif;
+    .event-title {
+      font-family:
+        "Cormorant Garamond",
+        serif;
 
-        font-size: 1.65rem;
+      font-size: 1.65rem;
 
-        font-weight: 600;
+      font-weight: 600;
 
-        margin-bottom: 8px;
-      }
+      margin-bottom: 8px;
 
-      .event-text {
-        color: #8e8881;
+      color: #eee8df;
+    }
 
-        line-height: 1.7;
+    .event-text {
+      color: #aaa29f;
 
-        font-family: "Cormorant Garamond", serif;
+      line-height: 1.7;
 
-        font-size: 1.08rem;
-      }
+      font-family:
+        "Cormorant Garamond",
+        serif;
 
-      /* =========================================================
+      font-size: 1.08rem;
+
+      text-shadow:
+        0 1px 12px rgba(0, 0, 0, 0.45);
+    }
+
+    /* =========================================================
        ERUPTION
     ========================================================== */
 
-      .eruption {
-        min-height: 78vh;
+    .eruption {
+      min-height: 78vh;
 
-        display: flex;
+      display: flex;
 
-        align-items: center;
-      }
+      align-items: center;
+    }
 
-      .eruption-number {
-        font-family: "Cormorant Garamond", serif;
+    .eruption-number {
+      font-family:
+        "Cormorant Garamond",
+        serif;
 
-        font-size: clamp(9rem, 22vw, 20rem);
+      font-size:
+        clamp(
+          9rem,
+          22vw,
+          20rem
+        );
 
-        line-height: 0.7;
+      line-height: 0.7;
 
-        color: rgba(255, 70, 20, 0.055);
+      color:
+        rgba(
+          255,
+          70,
+          20,
+          0.055
+        );
 
-        position: absolute;
+      position: absolute;
 
-        right: -2vw;
-        top: 50%;
+      right: -2vw;
+      top: 50%;
 
-        transform: translateY(-50%);
+      transform:
+        translateY(-50%);
 
-        pointer-events: none;
-      }
+      pointer-events: none;
+    }
 
-      .eruption-content {
-        position: relative;
+    .eruption-content {
+      position: relative;
 
-        z-index: 2;
+      z-index: 2;
 
-        width: 100%;
+      width: 100%;
 
-        display: flex;
+      display: flex;
 
-        flex-direction: column;
+      flex-direction: column;
 
-        align-items: center;
+      align-items: center;
 
-        text-align: center;
-      }
+      text-align: center;
+    }
 
-      .eruption h2 {
-        max-width: 850px;
-      }
+    .eruption h2 {
+      max-width: 850px;
+    }
 
-      .date-big {
-        font-size: clamp(3rem, 7vw, 7rem);
+    .date-big {
+      font-size:
+        clamp(
+          3rem,
+          7vw,
+          7rem
+        );
 
-        color: #ff6b2d;
+      color: #ff6b2d;
 
-        letter-spacing: -0.05em;
+      letter-spacing: -0.05em;
 
-        text-shadow: 0 0 50px rgba(255, 72, 25, 0.18);
+      text-shadow:
+        0 0 50px
+        rgba(
+          255,
+          72,
+          25,
+          0.18
+        );
 
-        margin-bottom: 25px;
+      margin-bottom: 25px;
 
-        font-weight: 600;
-      }
+      font-weight: 600;
+    }
 
-      .quote {
-        width: min(760px, 100%);
+    .quote {
+      width: min(760px, 100%);
 
-        margin-top: 55px;
+      margin-top: 55px;
 
-        padding: 30px 38px;
+      padding: 30px 38px;
 
-        font-family: "Cormorant Garamond", serif;
+      font-family:
+        "Cormorant Garamond",
+        serif;
 
-        font-style: italic;
+      font-style: italic;
 
-        font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-size:
+        clamp(
+          1.5rem,
+          3vw,
+          2.25rem
+        );
 
-        line-height: 1.4;
+      line-height: 1.4;
 
-        color: #ddd5cd;
+      color: #ddd5cd;
 
-        border-left: 2px solid var(--orange);
+      border-left:
+        2px solid
+        var(--orange);
 
-        border-right: 1px solid rgba(255, 100, 40, 0.12);
+      border-right:
+        1px solid
+        rgba(
+          255,
+          100,
+          40,
+          0.12
+        );
 
-        background: linear-gradient(
+      background:
+        linear-gradient(
           90deg,
           rgba(255, 70, 25, 0.035),
           transparent
         );
-      }
+    }
 
-      /* =========================================================
+    /* =========================================================
        INCIDENT
     ========================================================== */
 
-      .incident {
-        min-height: 82vh;
+    .incident {
+      min-height: 82vh;
 
-        display: flex;
+      display: flex;
 
-        align-items: center;
+      align-items: center;
 
-        background: radial-gradient(
+      background:
+        radial-gradient(
           ellipse at center,
-          rgba(115, 20, 13, 0.2),
+          rgba(115, 20, 13, 0.20),
           transparent 65%
         );
-      }
+    }
 
-      .incident-grid {
-        width: min(1080px, 100%);
+    .incident-grid {
+      width: min(1080px, 100%);
 
-        display: grid;
+      display: grid;
 
-        grid-template-columns:
-          0.95fr
-          1.05fr;
+      grid-template-columns:
+        0.95fr
+        1.05fr;
 
-        gap: 65px;
+      gap: 65px;
 
-        align-items: center;
+      align-items: center;
 
-        text-align: center;
-      }
+      text-align: center;
+    }
 
-      /*
+    /*
       IMAGE LAYER
 
-      Your file is already being used by the favicon,
-      so this uses the same image filename.
+      CENTERED:
+      - top: 50%
+      - left: 50%
+      - translate(-50%, -50%)
 
-      It is intentionally NOT solid.
-      Normal:
-        ~28% visible
-      Hover:
-        ~48% visible
+      This preserves cover behavior while guaranteeing
+      the image itself is centered inside the panel.
     */
 
-      .incident-visual {
-        min-height: 570px;
+    .incident-visual {
+      min-height: 570px;
 
-        position: relative;
+      position: relative;
 
-        display: flex;
+      display: flex;
 
-        align-items: center;
+      align-items: center;
 
-        justify-content: center;
+      justify-content: center;
 
-        overflow: hidden;
+      overflow: hidden;
 
-        isolation: isolate;
-      }
+      isolation: isolate;
+    }
 
-      .incident-image {
-        position: absolute;
+    .incident-image {
+      position: absolute;
 
-        inset: 0;
+      top: 50%;
+      left: 50%;
 
-        width: 100%;
-        height: 100%;
+      width: 100%;
+      height: 100%;
 
-        object-fit: cover;
+      object-fit: cover;
 
-        object-position: center;
+      object-position: left;
 
-        opacity: 0.28;
+      /*
+        Increased from 0.28 so the image is more visible.
+      */
+      opacity: 0.4;
 
-        filter: grayscale(100%) sepia(20%) contrast(0.82) brightness(0.72)
-          blur(1px);
+      filter:
+        grayscale(100%)
+        sepia(20%)
+        contrast(0.90)
+        brightness(0.48)
+        blur(1px);
 
-        transform: scale(1.035);
+      transform:
+        translate(-50%, -50%)
+        scale(1.035);
 
-        transition:
-          opacity 0.7s var(--ease),
-          filter 0.7s var(--ease),
-          transform 1.1s var(--ease);
+      transition:
+        opacity 0.7s var(--ease),
+        filter 0.7s var(--ease),
+        transform 1.1s var(--ease);
 
-        z-index: 0;
+      z-index: 0;
 
-        pointer-events: none;
-      }
+      pointer-events: none;
+    }
 
-      .incident-visual:hover .incident-image {
-        opacity: 0.48;
+    .incident-visual:hover .incident-image {
+      opacity: 0.52;
 
-        filter: grayscale(80%) sepia(25%) contrast(0.95) brightness(0.86)
-          blur(0.5px);
+      filter:
+        grayscale(80%)
+        sepia(25%)
+        contrast(1)
+        brightness(0.50)
+        blur(0.5px);
 
-        transform: scale(1.07);
-      }
+      transform:
+        translate(-50%, -50%)
+        scale(1.07);
+    }
 
-      .incident-image-overlay {
-        position: absolute;
+    .incident-image-overlay {
+      position: absolute;
 
-        inset: 0;
+      inset: 0;
 
-        z-index: 1;
+      z-index: 1;
 
-        background: linear-gradient(
+      background:
+        linear-gradient(
           180deg,
           rgba(5, 5, 5, 0.55),
           rgba(5, 5, 5, 0.18) 40%,
-          rgba(5, 5, 5, 0.7)
+          rgba(5, 5, 5, 0.70)
         );
 
-        pointer-events: none;
-      }
+      pointer-events: none;
+    }
 
-      .incident-visual::before {
-        content: "";
+    .incident-visual::before {
+      content: "";
 
-        position: absolute;
+      position: absolute;
 
-        width: 350px;
-        height: 500px;
+      width: 350px;
+      height: 500px;
 
-        background: radial-gradient(
+      background:
+        radial-gradient(
           ellipse,
           rgba(157, 28, 16, 0.32),
           transparent 65%
         );
 
-        filter: blur(30px);
+      filter: blur(30px);
 
-        animation: incidentPulse 4s ease-in-out infinite alternate;
+      animation:
+        incidentPulse
+        4s
+        ease-in-out
+        infinite
+        alternate;
 
-        z-index: 2;
+      z-index: 2;
 
-        pointer-events: none;
+      pointer-events: none;
+    }
+
+    @keyframes incidentPulse {
+      from {
+        transform: scale(0.85);
+        opacity: 0.42;
       }
 
-      @keyframes incidentPulse {
-        from {
-          transform: scale(0.85);
-          opacity: 0.42;
-        }
-
-        to {
-          transform: scale(1.1);
-          opacity: 0.8;
-        }
+      to {
+        transform: scale(1.1);
+        opacity: 0.8;
       }
+    }
 
-      .silhouette {
-        width: 170px;
-        height: 390px;
+    .silhouette {
+      width: 170px;
+      height: 390px;
 
-        position: relative;
+      position: relative;
 
-        z-index: 3;
+      z-index: 3;
 
-        opacity: 0.14;
+      opacity: 0.14;
 
-        filter: blur(0.4px);
-      }
+      filter: blur(0.4px);
+    }
 
-      .silhouette::before {
-        content: "";
+    .silhouette::before {
+      content: "";
 
-        position: absolute;
+      position: absolute;
 
-        width: 90px;
-        height: 90px;
+      width: 90px;
+      height: 90px;
 
-        border-radius: 50%;
+      border-radius: 50%;
 
-        background: #17100e;
+      background: #17100e;
 
-        left: 40px;
-        top: 0;
-      }
+      left: 40px;
+      top: 0;
+    }
 
-      .silhouette::after {
-        content: "";
+    .silhouette::after {
+      content: "";
 
-        position: absolute;
+      position: absolute;
 
-        width: 140px;
-        height: 290px;
+      width: 140px;
+      height: 290px;
 
-        background: linear-gradient(to bottom, #1a110f, #090706);
+      background:
+        linear-gradient(
+          to bottom,
+          #1a110f,
+          #090706
+        );
 
-        border-radius: 60px 60px 25px 25px;
+      border-radius:
+        60px 60px 25px 25px;
 
-        left: 15px;
-        top: 80px;
-      }
+      left: 15px;
+      top: 80px;
+    }
 
-      .incident-note {
-        position: absolute;
+    .incident-note {
+      position: absolute;
 
-        bottom: 35px;
-        left: 35px;
-        right: 35px;
+      bottom: 35px;
+      left: 35px;
+      right: 35px;
 
-        z-index: 4;
+      z-index: 4;
 
-        color: #aaa29b;
+      color: #b0a8a0;
 
-        font-size: 0.55rem;
+      font-size: 0.55rem;
 
-        letter-spacing: 0.15em;
+      letter-spacing: 0.15em;
 
-        text-transform: uppercase;
+      text-transform: uppercase;
 
-        text-align: center;
-      }
+      text-align: center;
+    }
 
-      .incident-grid > div:last-child {
-        display: flex;
+    .incident-grid > div:last-child {
+      display: flex;
 
-        flex-direction: column;
+      flex-direction: column;
 
-        align-items: center;
-      }
+      align-items: center;
+    }
 
-      .incident-date {
-        font-size: 5rem;
+    .incident-date {
+      font-size: 5rem;
 
-        line-height: 1;
+      line-height: 1;
 
-        color: #ff6330;
+      color: #ff6330;
 
-        margin-bottom: 15px;
+      margin-bottom: 15px;
 
-        font-weight: 600;
-      }
+      font-weight: 600;
+    }
 
-      .incident-title {
-        font-family: "Cormorant Garamond", serif;
+    .incident-title {
+      font-family:
+        "Cormorant Garamond",
+        serif;
 
-        font-size: clamp(3rem, 5vw, 5.2rem);
+      font-size:
+        clamp(
+          3rem,
+          5vw,
+          5.2rem
+        );
 
-        line-height: 0.88;
+      line-height: 0.88;
 
-        letter-spacing: -0.045em;
+      letter-spacing: -0.045em;
 
-        margin-bottom: 28px;
+      margin-bottom: 28px;
 
-        font-weight: 600;
-      }
+      font-weight: 600;
+    }
 
-      .incident-title span {
-        color: var(--orange);
-      }
+    .incident-title span {
+      color: var(--orange);
+    }
 
-      .incident-text {
-        width: min(570px, 100%);
+    .incident-text {
+      width: min(570px, 100%);
 
-        font-family: "Cormorant Garamond", serif;
+      font-family:
+        "Cormorant Garamond",
+        serif;
 
-        font-size: clamp(1.1rem, 1.7vw, 1.3rem);
+      font-size:
+        clamp(
+          1.1rem,
+          1.7vw,
+          1.3rem
+        );
 
-        line-height: 1.65;
+      line-height: 1.65;
 
-        color: #a39b94;
+      color: #b8afa7;
 
-        text-align: center;
-      }
+      text-align: center;
 
-      .warning {
-        width: min(560px, 100%);
+      text-shadow:
+        0 1px 12px rgba(0, 0, 0, 0.45);
+    }
 
-        margin-top: 26px;
+    .warning {
+      width: min(560px, 100%);
 
-        padding: 18px 20px;
+      margin-top: 26px;
 
-        border: 1px solid rgba(255, 85, 45, 0.2);
+      padding: 18px 20px;
 
-        border-radius: 12px;
+      border:
+        1px solid
+        rgba(
+          255,
+          85,
+          45,
+          0.2
+        );
 
-        background: rgba(90, 20, 12, 0.14);
+      border-radius: 12px;
 
-        color: #bdb2aa;
+      background:
+        rgba(
+          90,
+          20,
+          12,
+          0.14
+        );
 
-        font-size: 0.78rem;
+      color: #c4b9b0;
 
-        line-height: 1.6;
+      font-size: 0.78rem;
 
-        text-align: center;
-      }
+      line-height: 1.6;
 
-      /* =========================================================
+      text-align: center;
+    }
+
+    /* =========================================================
        NUMBERS
     ========================================================== */
 
-      .numbers {
-        width: min(1000px, 100%);
+    .numbers {
+      width: min(1000px, 100%);
 
-        display: grid;
+      display: grid;
 
-        grid-template-columns: repeat(3, 1fr);
+      grid-template-columns:
+        repeat(3, 1fr);
 
-        gap: 18px;
+      gap: 18px;
 
-        margin-top: 60px;
-      }
+      margin-top: 60px;
+    }
 
-      .number-card {
-        padding: 34px 26px;
+    .number-card {
+      padding:
+        34px
+        26px;
 
-        min-height: 220px;
+      min-height: 220px;
 
-        transition:
-          transform 0.5s var(--ease),
-          border-color 0.5s;
+      transition:
+        transform 0.5s var(--ease),
+        border-color 0.5s;
 
-        display: flex;
+      display: flex;
 
-        flex-direction: column;
+      flex-direction: column;
 
-        align-items: center;
+      align-items: center;
 
-        justify-content: center;
+      justify-content: center;
 
-        text-align: center;
-      }
+      text-align: center;
+    }
 
-      .number-card:hover {
-        transform: translateY(-8px) rotateX(2deg);
+    .number-card:hover {
+      transform:
+        translateY(-8px)
+        rotateX(2deg);
 
-        border-color: rgba(255, 100, 40, 0.25);
-      }
+      border-color:
+        rgba(
+          255,
+          100,
+          40,
+          0.25
+        );
+    }
 
-      .number {
-        font-size: 4rem;
+    .number {
+      font-size: 4rem;
 
-        color: #f0e8de;
+      color: #f0e8de;
 
-        line-height: 1;
+      line-height: 1;
 
-        margin-bottom: 14px;
+      margin-bottom: 14px;
 
-        font-weight: 600;
-      }
+      font-weight: 600;
+    }
 
-      .number.orange {
-        color: var(--orange);
-      }
+    .number.orange {
+      color: var(--orange);
+    }
 
-      .number-label {
-        font-family: "Cormorant Garamond", serif;
+    .number-label {
+      font-family:
+        "Cormorant Garamond",
+        serif;
 
-        font-size: 1.15rem;
+      font-size: 1.15rem;
 
-        line-height: 1.45;
+      line-height: 1.45;
 
-        color: #99918a;
+      color: #aaa29b;
 
-        max-width: 260px;
-      }
+      max-width: 260px;
 
-      .source {
-        width: 100%;
+      text-shadow:
+        0 1px 12px rgba(0, 0, 0, 0.45);
+    }
 
-        margin-top: 20px;
+    .source {
+      width: 100%;
 
-        padding-top: 13px;
+      margin-top: 20px;
 
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 13px;
 
-        font-size: 0.55rem;
+      border-top:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          0.06
+        );
 
-        text-transform: uppercase;
+      font-size: 0.55rem;
 
-        letter-spacing: 0.13em;
+      text-transform: uppercase;
 
-        color: #66605b;
-      }
+      letter-spacing: 0.13em;
 
-      /* =========================================================
+      color: #817a74;
+    }
+
+    /* =========================================================
        COURTS
     ========================================================== */
 
-      .court-timeline {
-        width: min(900px, 100%);
+    .court-timeline {
+      width: min(900px, 100%);
 
-        margin-top: 60px;
+      margin-top: 60px;
 
-        position: relative;
+      position: relative;
 
-        border-left: 1px solid rgba(255, 100, 40, 0.2);
+      border-left:
+        1px solid
+        rgba(
+          255,
+          100,
+          40,
+          0.2
+        );
 
-        padding-left: 38px;
+      padding-left: 38px;
 
-        text-align: center;
-      }
+      text-align: center;
+    }
 
-      .court-item {
-        position: relative;
+    .court-item {
+      position: relative;
 
-        padding: 28px;
+      padding: 28px;
 
-        margin-bottom: 20px;
+      margin-bottom: 20px;
 
-        transition: 0.5s var(--ease);
-      }
+      transition:
+        0.5s
+        var(--ease);
+    }
 
-      .court-item::before {
-        content: "";
+    .court-item::before {
+      content: "";
 
-        position: absolute;
+      position: absolute;
 
-        left: -44px;
-        top: 38px;
+      left: -44px;
+      top: 38px;
 
-        width: 10px;
-        height: 10px;
+      width: 10px;
+      height: 10px;
 
-        border-radius: 50%;
+      border-radius: 50%;
 
-        background: #ff5a29;
+      background: #ff5a29;
 
-        box-shadow:
-          0 0 0 5px rgba(255, 90, 41, 0.1),
-          0 0 20px rgba(255, 90, 41, 0.6);
-      }
+      box-shadow:
+        0 0 0 5px
+        rgba(
+          255,
+          90,
+          41,
+          0.1
+        ),
+        0 0 20px
+        rgba(
+          255,
+          90,
+          41,
+          0.6
+        );
+    }
 
-      .court-item:hover {
-        transform: translateX(8px);
-      }
+    .court-item:hover {
+      transform:
+        translateX(8px);
+    }
 
-      .court-date {
-        font-size: 0.6rem;
+    .court-date {
+      font-size: 0.6rem;
 
-        letter-spacing: 0.2em;
+      letter-spacing: 0.2em;
 
-        color: var(--orange);
+      color: var(--orange);
 
-        margin-bottom: 8px;
-      }
+      margin-bottom: 8px;
+    }
 
-      .court-title {
-        font-family: "Cormorant Garamond", serif;
+    .court-title {
+      font-family:
+        "Cormorant Garamond",
+        serif;
 
-        font-size: 1.9rem;
+      font-size: 1.9rem;
 
-        font-weight: 600;
+      font-weight: 600;
 
-        margin-bottom: 8px;
-      }
+      margin-bottom: 8px;
 
-      .court-text {
-        color: #938c85;
+      color: #eee8df;
+    }
 
-        line-height: 1.7;
+    .court-text {
+      color: #aaa29f;
 
-        font-family: "Cormorant Garamond", serif;
+      line-height: 1.7;
 
-        font-size: 1.1rem;
-      }
+      font-family:
+        "Cormorant Garamond",
+        serif;
 
-      /* =========================================================
+      font-size: 1.1rem;
+
+      text-shadow:
+        0 1px 12px rgba(0, 0, 0, 0.45);
+    }
+
+    /* =========================================================
        HUMAN
     ========================================================== */
 
-      .human {
-        min-height: 78vh;
+    .human {
+      min-height: 78vh;
 
-        display: flex;
+      display: flex;
 
-        align-items: center;
+      align-items: center;
 
-        justify-content: center;
+      justify-content: center;
 
-        text-align: center;
-      }
+      text-align: center;
+    }
 
-      .human-inner {
-        width: 100%;
+    .human-inner {
+      width: 100%;
 
-        max-width: 950px;
+      max-width: 950px;
 
-        display: flex;
+      display: flex;
 
-        flex-direction: column;
+      flex-direction: column;
 
-        align-items: center;
-      }
+      align-items: center;
+    }
 
-      .human-word {
-        font-size: clamp(5rem, 12vw, 12rem);
+    .human-word {
+      font-size:
+        clamp(
+          5rem,
+          12vw,
+          12rem
+        );
 
-        line-height: 0.76;
+      line-height: 0.76;
 
-        letter-spacing: -0.07em;
+      letter-spacing: -0.07em;
 
-        color: #e9e0d8;
+      color: #e9e0d8;
 
-        opacity: 0.95;
+      opacity: 0.95;
 
-        margin-bottom: 45px;
+      margin-bottom: 45px;
 
-        font-weight: 600;
-      }
+      font-weight: 600;
+    }
 
-      .human-word span {
-        color: var(--orange);
-      }
+    .human-word span {
+      color: var(--orange);
+    }
 
-      .human-copy {
-        max-width: 650px;
+    .human-copy {
+      max-width: 650px;
 
-        margin: auto;
+      margin: auto;
 
-        color: #9d958e;
+      color: #b4aca5;
 
-        font-family: "Cormorant Garamond", serif;
+      font-family:
+        "Cormorant Garamond",
+        serif;
 
-        font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+      font-size:
+        clamp(
+          1.2rem,
+          1.8vw,
+          1.4rem
+        );
 
-        line-height: 1.7;
-      }
+      line-height: 1.7;
 
-      /* =========================================================
+      text-shadow:
+        0 1px 12px rgba(0, 0, 0, 0.45);
+    }
+
+    /* =========================================================
        QUESTIONS
     ========================================================== */
 
-      .questions {
-        width: min(1000px, 100%);
+    .questions {
+      width: min(1000px, 100%);
 
-        display: grid;
+      display: grid;
 
-        grid-template-columns:
-          1fr
-          1fr;
+      grid-template-columns:
+        1fr
+        1fr;
 
-        gap: 20px;
+      gap: 20px;
 
-        margin-top: 60px;
-      }
+      margin-top: 60px;
+    }
 
-      .question {
-        padding: 35px;
+    .question {
+      padding: 35px;
 
-        min-height: 220px;
+      min-height: 220px;
 
-        transition: 0.5s var(--ease);
+      transition:
+        0.5s
+        var(--ease);
 
-        cursor: pointer;
+      cursor: pointer;
 
-        text-align: center;
+      text-align: center;
 
-        display: flex;
+      display: flex;
 
-        flex-direction: column;
+      flex-direction: column;
 
-        align-items: center;
-      }
+      align-items: center;
+    }
 
-      .question:hover {
-        transform: translateY(-8px) scale(1.01);
+    .question:hover {
+      transform:
+        translateY(-8px)
+        scale(1.01);
 
-        background: linear-gradient(
+      background:
+        linear-gradient(
           135deg,
           rgba(255, 80, 30, 0.08),
           rgba(255, 255, 255, 0.025)
         );
 
-        border-color: rgba(255, 100, 40, 0.3);
-      }
+      border-color:
+        rgba(
+          255,
+          100,
+          40,
+          0.3
+        );
+    }
 
-      .q-number {
-        color: var(--orange);
+    .q-number {
+      color: var(--orange);
 
-        font-size: 0.6rem;
+      font-size: 0.6rem;
 
-        letter-spacing: 0.2em;
+      letter-spacing: 0.2em;
 
-        margin-bottom: 20px;
-      }
+      margin-bottom: 20px;
+    }
 
-      .question h3 {
-        font-family: "Cormorant Garamond", serif;
+    .question h3 {
+      font-family:
+        "Cormorant Garamond",
+        serif;
 
-        font-size: 2rem;
+      font-size: 2rem;
 
-        line-height: 1;
+      line-height: 1;
 
-        margin-bottom: 16px;
+      margin-bottom: 16px;
 
-        font-weight: 600;
-      }
+      font-weight: 600;
 
-      .question p {
-        color: #89827c;
+      color: #eee8df;
+    }
 
-        font-family: "Cormorant Garamond", serif;
+    .question p {
+      color: #a49c95;
 
-        font-size: 1.08rem;
+      font-family:
+        "Cormorant Garamond",
+        serif;
 
-        line-height: 1.6;
+      font-size: 1.08rem;
 
-        max-width: 420px;
-      }
+      line-height: 1.6;
 
-      /* =========================================================
+      max-width: 420px;
+
+      text-shadow:
+        0 1px 12px rgba(0, 0, 0, 0.45);
+    }
+
+    /* =========================================================
        FINAL
     ========================================================== */
 
-      .final {
-        min-height: 82vh;
+    .final {
+      min-height: 82vh;
 
-        display: flex;
+      display: flex;
 
-        align-items: center;
+      align-items: center;
 
-        justify-content: center;
+      justify-content: center;
 
-        text-align: center;
+      text-align: center;
 
-        position: relative;
+      position: relative;
 
-        padding: 100px 20px;
-      }
+      padding:
+        100px
+        20px;
+    }
 
-      .final::before {
-        content: "";
+    .final::before {
+      content: "";
 
-        position: absolute;
+      position: absolute;
 
-        width: 700px;
-        height: 700px;
+      width: 700px;
+      height: 700px;
 
-        background: radial-gradient(
+      background:
+        radial-gradient(
           circle,
           rgba(130, 24, 12, 0.22),
           transparent 65%
         );
 
-        filter: blur(40px);
+      filter: blur(40px);
 
-        pointer-events: none;
+      pointer-events: none;
+    }
+
+    .final-content {
+      position: relative;
+
+      z-index: 2;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+    }
+
+    .final-small {
+      font-size: 0.6rem;
+
+      letter-spacing: 0.35em;
+
+      text-transform: uppercase;
+
+      color: #aaa29b;
+
+      margin-bottom: 25px;
+    }
+
+    .final h2 {
+      font-family:
+        "Cormorant Garamond",
+        serif;
+
+      font-size:
+        clamp(
+          5rem,
+          10vw,
+          10rem
+        );
+
+      line-height: 0.78;
+
+      letter-spacing: -0.07em;
+
+      font-weight: 600;
+    }
+
+    .final h2 span {
+      color: var(--orange);
+    }
+
+    .final-line {
+      width: 80px;
+
+      height: 1px;
+
+      background: var(--orange);
+
+      margin: 38px auto;
+
+      box-shadow:
+        0 0 15px var(--orange);
+    }
+
+    .final p {
+      color: #8d857f;
+
+      font-size: 0.8rem;
+
+      letter-spacing: 0.08em;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================== */
+
+    footer {
+      position: relative;
+
+      z-index: 5;
+
+      border-top:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          0.06
+        );
+
+      padding: 45px 20px;
+
+      color: #6f6862;
+
+      font-size: 0.6rem;
+
+      letter-spacing: 0.12em;
+
+      text-transform: uppercase;
+
+      text-align: center;
+    }
+
+    /* =========================================================
+       CSS BACKUP EMBERS
+    ========================================================== */
+
+    .embers {
+      position: fixed;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      z-index: 3;
+
+      overflow: hidden;
+    }
+
+    .ember {
+      position: absolute;
+
+      bottom: -20px;
+
+      width: 2px;
+      height: 2px;
+
+      border-radius: 50%;
+
+      background:
+        #ff6a2a;
+
+      box-shadow:
+        0 0 6px #ff5424,
+        0 0 14px
+        rgba(
+          255,
+          75,
+          25,
+          0.6
+        );
+
+      animation:
+        rise
+        linear
+        infinite;
+    }
+
+    @keyframes rise {
+      0% {
+        transform:
+          translate3d(
+            0,
+            0,
+            0
+          )
+          scale(0.5);
+
+        opacity: 0;
       }
 
-      .final-content {
-        position: relative;
+      10% {
+        opacity: 1;
+      }
 
-        z-index: 2;
+      70% {
+        opacity: 0.7;
+      }
 
-        display: flex;
+      100% {
+        transform:
+          translate3d(
+            var(--drift),
+            -110vh,
+            0
+          )
+          scale(0);
 
-        flex-direction: column;
+        opacity: 0;
+      }
+    }
+
+    /* =========================================================
+       TABLET
+    ========================================================== */
+
+    @media (max-width: 1000px) {
+
+      .chapters {
+        right: 18px;
+      }
+
+      .hero-date {
+        right: 0;
+      }
+
+      .before-layout {
+        grid-template-columns: 1fr;
+
+        max-width: 720px;
+
+        gap: 35px;
+      }
+
+      .numbers {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+      .incident-grid {
+        grid-template-columns: 1fr;
+
+        max-width: 760px;
+
+        gap: 50px;
+      }
+
+      .incident-visual {
+        min-height: 500px;
+
+        width: 100%;
+      }
+
+      .incident-grid > div:last-child {
+        order: -1;
+      }
+
+      .court-timeline {
+        max-width: 760px;
+      }
+    }
+
+    /* =========================================================
+       MOBILE
+    ========================================================== */
+
+    @media (max-width: 700px) {
+
+      html,
+      body {
+        width: 100%;
+
+        overflow-x: hidden;
+      }
+
+      #three-bg {
+        opacity: 0.9;
+      }
+
+      .cursor-glow {
+        display: none;
+      }
+
+      .nav {
+        height: 64px;
+
+        padding:
+          0
+          22px;
+      }
+
+      .logo {
+        font-size: 0.62rem;
+
+        letter-spacing: 0.27em;
+      }
+
+      .nav-status {
+        display: none;
+      }
+
+      .chapters {
+        display: none;
+      }
+
+      .container,
+      .hero .container {
+        width: calc(100vw - 40px);
+
+        max-width: none;
+      }
+
+      /* -----------------------------
+         HERO MOBILE
+      ------------------------------ */
+
+      .hero {
+        min-height: 100svh;
+
+        padding:
+          105px
+          0
+          95px;
 
         align-items: center;
+
+        justify-content: center;
       }
 
-      .final-small {
-        font-size: 0.6rem;
+      .hero-inner {
+        max-width: 100%;
 
-        letter-spacing: 0.35em;
+        justify-content: center;
+      }
 
-        text-transform: uppercase;
+      .kicker {
+        max-width: 280px;
 
-        color: #8e8881;
+        font-size: 0.5rem;
+
+        line-height: 1.35;
+
+        letter-spacing: 0.25em;
+
+        gap: 10px;
+
+        margin-bottom: 24px;
+      }
+
+      .kicker-line {
+        width: 25px;
+      }
+
+      .hero h1 {
+        font-size:
+          clamp(
+            4rem,
+            20vw,
+            6rem
+          );
+
+        line-height: 0.82;
+
+        letter-spacing: -0.065em;
+
+        white-space: nowrap;
+      }
+
+      .hero-subtitle {
+        margin-top: 28px;
+
+        width: min(330px, 100%);
+
+        font-size: 1.28rem;
+
+        line-height: 1.38;
+      }
+
+      .hero-date {
+        position: relative;
+
+        right: auto;
+        bottom: auto;
+
+        margin-top: 34px;
+
+        font-size:
+          clamp(
+            3.1rem,
+            15vw,
+            4.5rem
+          );
+
+        line-height: 0.9;
+
+        white-space: nowrap;
+
+        color:
+          rgba(
+            255,
+            255,
+            255,
+            0.045
+          );
+      }
+
+      .scroll-indicator {
+        bottom: 20px;
+
+        font-size: 0.48rem;
+      }
+
+      .scroll-line {
+        height: 35px;
+      }
+
+      /* -----------------------------
+         SECTIONS
+      ------------------------------ */
+
+      .section {
+        padding:
+          82px
+          0;
+      }
+
+      .section-number {
+        font-size: 0.5rem;
+
+        letter-spacing: 0.26em;
+
+        margin-bottom: 17px;
+
+        gap: 10px;
+      }
+
+      .section-number::before {
+        width: 18px;
+      }
+
+      .section h2 {
+        font-size:
+          clamp(
+            3.25rem,
+            14vw,
+            5rem
+          );
+
+        line-height: 0.86;
 
         margin-bottom: 25px;
       }
 
-      .final h2 {
-        font-family: "Cormorant Garamond", serif;
+      .section-intro {
+        width: min(330px, 100%);
 
-        font-size: clamp(5rem, 10vw, 10rem);
+        font-size: 1.18rem;
 
-        line-height: 0.78;
-
-        letter-spacing: -0.07em;
-
-        font-weight: 600;
+        line-height: 1.55;
       }
 
-      .final h2 span {
-        color: var(--orange);
-      }
-
-      .final-line {
-        width: 80px;
-
-        height: 1px;
-
-        background: var(--orange);
-
-        margin: 38px auto;
-
-        box-shadow: 0 0 15px var(--orange);
-      }
-
-      .final p {
-        color: #79736e;
-
-        font-size: 0.8rem;
-
-        letter-spacing: 0.08em;
-      }
-
-      /* =========================================================
-       FOOTER
-    ========================================================== */
-
-      footer {
-        position: relative;
-
-        z-index: 5;
-
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
-
-        padding: 45px 20px;
-
-        color: #57524d;
-
-        font-size: 0.6rem;
-
-        letter-spacing: 0.12em;
-
-        text-transform: uppercase;
-
-        text-align: center;
-      }
-
-      /* =========================================================
-       CSS BACKUP EMBERS
-    ========================================================== */
-
-      .embers {
-        position: fixed;
-
-        inset: 0;
-
-        pointer-events: none;
-
-        z-index: 3;
-
-        overflow: hidden;
-      }
-
-      .ember {
-        position: absolute;
-
-        bottom: -20px;
-
-        width: 2px;
-        height: 2px;
-
-        border-radius: 50%;
-
-        background: #ff6a2a;
-
-        box-shadow:
-          0 0 6px #ff5424,
-          0 0 14px rgba(255, 75, 25, 0.6);
-
-        animation: rise linear infinite;
-      }
-
-      @keyframes rise {
-        0% {
-          transform: translate3d(0, 0, 0) scale(0.5);
-
-          opacity: 0;
-        }
-
-        10% {
-          opacity: 1;
-        }
-
-        70% {
-          opacity: 0.7;
-        }
-
-        100% {
-          transform: translate3d(var(--drift), -110vh, 0) scale(0);
-
-          opacity: 0;
-        }
-      }
-
-      /* =========================================================
-       TABLET
-    ========================================================== */
-
-      @media (max-width: 1000px) {
-        .chapters {
-          right: 18px;
-        }
-
-        .hero-date {
-          right: 0;
-        }
-
-        .before-layout {
-          grid-template-columns: 1fr;
-
-          max-width: 720px;
-
-          gap: 35px;
-        }
-
-        .numbers {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        .incident-grid {
-          grid-template-columns: 1fr;
-
-          max-width: 760px;
-
-          gap: 50px;
-        }
-
-        .incident-visual {
-          min-height: 500px;
-
-          width: 100%;
-        }
-
-        .incident-grid > div:last-child {
-          order: -1;
-        }
-
-        .court-timeline {
-          max-width: 760px;
-        }
-      }
-
-      /* =========================================================
-       MOBILE
-    ========================================================== */
-
-      @media (max-width: 700px) {
-        html,
-        body {
-          width: 100%;
-
-          overflow-x: hidden;
-        }
-
-        #three-bg {
-          opacity: 0.9;
-        }
-
-        .cursor-glow {
-          display: none;
-        }
-
-        .nav {
-          height: 64px;
-
-          padding: 0 22px;
-        }
-
-        .logo {
-          font-size: 0.62rem;
-
-          letter-spacing: 0.27em;
-        }
-
-        .nav-status {
-          display: none;
-        }
-
-        .chapters {
-          display: none;
-        }
-
-        .container,
-        .hero .container {
-          width: calc(100vw - 40px);
-
-          max-width: none;
-        }
-
-        /* -----------------------------
-         HERO MOBILE
-      ------------------------------ */
-
-        .hero {
-          min-height: 100svh;
-
-          padding: 105px 0 95px;
-
-          align-items: center;
-
-          justify-content: center;
-        }
-
-        .hero-inner {
-          max-width: 100%;
-
-          justify-content: center;
-        }
-
-        .kicker {
-          max-width: 280px;
-
-          font-size: 0.5rem;
-
-          line-height: 1.35;
-
-          letter-spacing: 0.25em;
-
-          gap: 10px;
-
-          margin-bottom: 24px;
-        }
-
-        .kicker-line {
-          width: 25px;
-        }
-
-        .hero h1 {
-          font-size: clamp(4rem, 20vw, 6rem);
-
-          line-height: 0.82;
-
-          letter-spacing: -0.065em;
-
-          white-space: nowrap;
-        }
-
-        .hero-subtitle {
-          margin-top: 28px;
-
-          width: min(330px, 100%);
-
-          font-size: 1.28rem;
-
-          line-height: 1.38;
-        }
-
-        /*
-        Removed the giant absolute date composition on mobile.
-        This prevents the exact dead-space problem shown in
-        the screenshot.
-      */
-
-        .hero-date {
-          position: relative;
-
-          right: auto;
-          bottom: auto;
-
-          margin-top: 34px;
-
-          font-size: clamp(3.1rem, 15vw, 4.5rem);
-
-          line-height: 0.9;
-
-          white-space: nowrap;
-
-          color: rgba(255, 255, 255, 0.045);
-        }
-
-        .scroll-indicator {
-          bottom: 20px;
-
-          font-size: 0.48rem;
-        }
-
-        .scroll-line {
-          height: 35px;
-        }
-
-        /* -----------------------------
-         SECTIONS
-      ------------------------------ */
-
-        .section {
-          padding: 82px 0;
-        }
-
-        .section-number {
-          font-size: 0.5rem;
-
-          letter-spacing: 0.26em;
-
-          margin-bottom: 17px;
-
-          gap: 10px;
-        }
-
-        .section-number::before {
-          width: 18px;
-        }
-
-        .section h2 {
-          font-size: clamp(3.25rem, 14vw, 5rem);
-
-          line-height: 0.86;
-
-          margin-bottom: 25px;
-        }
-
-        .section-intro {
-          width: min(330px, 100%);
-
-          font-size: 1.18rem;
-
-          line-height: 1.55;
-        }
-
-        /* -----------------------------
+      /* -----------------------------
          BEFORE
       ------------------------------ */
 
-        .before-layout {
-          width: 100%;
+      .before-layout {
+        width: 100%;
 
-          margin-top: 48px;
+        margin-top: 48px;
 
-          gap: 35px;
-        }
+        gap: 35px;
+      }
 
-        .year {
-          font-size: 4.5rem;
-        }
+      .year {
+        font-size: 4.5rem;
+      }
 
-        .event {
-          padding: 24px 20px;
+      .event {
+        padding: 24px 20px;
 
-          border-radius: 18px;
-        }
+        border-radius: 18px;
+      }
 
-        .event-title {
-          font-size: 1.55rem;
-        }
+      .event-title {
+        font-size: 1.55rem;
+      }
 
-        .event-text {
-          font-size: 1.08rem;
-        }
+      .event-text {
+        font-size: 1.08rem;
+      }
 
-        /* -----------------------------
+      /* -----------------------------
          ERUPTION
       ------------------------------ */
 
-        .eruption {
-          min-height: auto;
+      .eruption {
+        min-height: auto;
 
-          padding-top: 95px;
+        padding-top: 95px;
 
-          padding-bottom: 95px;
-        }
+        padding-bottom: 95px;
+      }
 
-        .eruption-number {
-          right: -10vw;
+      .eruption-number {
+        right: -10vw;
 
-          top: 35%;
+        top: 35%;
 
-          font-size: 13rem;
-        }
+        font-size: 13rem;
+      }
 
-        .date-big {
-          font-size: clamp(2.7rem, 12vw, 4rem);
+      .date-big {
+        font-size:
+          clamp(
+            2.7rem,
+            12vw,
+            4rem
+          );
 
-          margin-bottom: 18px;
-        }
+        margin-bottom: 18px;
+      }
 
-        .quote {
-          margin-top: 38px;
+      .quote {
+        margin-top: 38px;
 
-          padding: 22px 22px;
+        padding:
+          22px
+          22px;
 
-          font-size: 1.45rem;
+        font-size: 1.45rem;
 
-          line-height: 1.38;
-        }
+        line-height: 1.38;
+      }
 
-        /* -----------------------------
+      /* -----------------------------
          INCIDENT
       ------------------------------ */
 
-        .incident {
-          min-height: auto;
+      .incident {
+        min-height: auto;
 
-          padding: 95px 0;
-        }
+        padding:
+          95px
+          0;
+      }
 
-        .incident-grid {
-          width: 100%;
+      .incident-grid {
+        width: 100%;
 
-          gap: 38px;
-        }
+        gap: 38px;
+      }
 
-        .incident-grid > div:last-child {
-          order: 0;
-        }
+      .incident-grid > div:last-child {
+        order: 0;
+      }
 
-        .incident-visual {
-          min-height: 420px;
+      .incident-visual {
+        min-height: 420px;
 
-          border-radius: 18px;
-        }
+        border-radius: 18px;
+      }
 
-        .incident-image {
-          opacity: 0.25;
-        }
-
-        /*
-        On touch screens there is no hover.
-        Keep it subdued rather than making the disturbing
-        image suddenly too visible.
+      /*
+        Centered image remains visible on mobile.
       */
 
-        .incident-visual:hover .incident-image {
-          opacity: 0.25;
-        }
+      .incident-image {
+        opacity: 0.34;
 
-        .incident-date {
-          font-size: 3.4rem;
+        top: 50%;
+        left: 50%;
 
-          margin-bottom: 13px;
-        }
+        transform:
+          translate(-50%, -50%)
+          scale(1.035);
+      }
 
-        .incident-title {
-          font-size: clamp(3rem, 13vw, 4.3rem);
+      .incident-visual:hover .incident-image {
+        opacity: 0.34;
 
-          line-height: 0.88;
+        transform:
+          translate(-50%, -50%)
+          scale(1.035);
+      }
 
-          margin-bottom: 24px;
-        }
+      .incident-date {
+        font-size: 3.4rem;
 
-        .incident-text {
-          width: min(335px, 100%);
+        margin-bottom: 13px;
+      }
 
-          font-size: 1.16rem;
+      .incident-title {
+        font-size:
+          clamp(
+            3rem,
+            13vw,
+            4.3rem
+          );
 
-          line-height: 1.58;
-        }
+        line-height: 0.88;
 
-        .warning {
-          width: min(335px, 100%);
+        margin-bottom: 24px;
+      }
 
-          font-size: 0.72rem;
-        }
+      .incident-text {
+        width: min(335px, 100%);
 
-        /* -----------------------------
+        font-size: 1.16rem;
+
+        line-height: 1.58;
+      }
+
+      .warning {
+        width: min(335px, 100%);
+
+        font-size: 0.72rem;
+      }
+
+      /* -----------------------------
          NUMBERS
       ------------------------------ */
 
-        .numbers {
-          width: 100%;
+      .numbers {
+        width: 100%;
 
-          grid-template-columns: 1fr;
+        grid-template-columns: 1fr;
 
-          gap: 14px;
+        gap: 14px;
 
-          margin-top: 45px;
-        }
+        margin-top: 45px;
+      }
 
-        .number-card {
-          min-height: 190px;
+      .number-card {
+        min-height: 190px;
 
-          padding: 30px 24px;
-        }
+        padding: 30px 24px;
+      }
 
-        .number {
-          font-size: 3.6rem;
-        }
+      .number {
+        font-size: 3.6rem;
+      }
 
-        .number-label {
-          font-size: 1.08rem;
-        }
+      .number-label {
+        font-size: 1.08rem;
+      }
 
-        /* -----------------------------
+      /* -----------------------------
          COURTS
       ------------------------------ */
 
-        .court-timeline {
-          width: calc(100% - 10px);
+      .court-timeline {
+        width: calc(100% - 10px);
 
-          margin-top: 45px;
+        margin-top: 45px;
 
-          padding-left: 20px;
+        padding-left: 20px;
 
-          border-left-color: rgba(255, 100, 40, 0.18);
-        }
+        border-left-color:
+          rgba(
+            255,
+            100,
+            40,
+            0.18
+          );
+      }
 
-        .court-item {
-          padding: 24px 20px;
+      .court-item {
+        padding:
+          24px
+          20px;
 
-          border-radius: 18px;
+        border-radius: 18px;
 
-          margin-bottom: 15px;
-        }
+        margin-bottom: 15px;
+      }
 
-        .court-item::before {
-          left: -26px;
+      .court-item::before {
+        left: -26px;
 
-          width: 8px;
-          height: 8px;
-        }
+        width: 8px;
+        height: 8px;
+      }
 
-        .court-title {
-          font-size: 1.7rem;
-        }
+      .court-title {
+        font-size: 1.7rem;
+      }
 
-        .court-text {
-          font-size: 1.05rem;
+      .court-text {
+        font-size: 1.05rem;
 
-          line-height: 1.6;
-        }
+        line-height: 1.6;
+      }
 
-        /* -----------------------------
+      /* -----------------------------
          HUMAN
       ------------------------------ */
 
-        .human {
-          min-height: auto;
+      .human {
+        min-height: auto;
 
-          padding: 110px 0;
-        }
+        padding:
+          110px
+          0;
+      }
 
-        .human-word {
-          font-size: clamp(5rem, 22vw, 7rem);
+      .human-word {
+        font-size:
+          clamp(
+            5rem,
+            22vw,
+            7rem
+          );
 
-          line-height: 0.78;
+        line-height: 0.78;
 
-          margin-bottom: 35px;
-        }
+        margin-bottom: 35px;
+      }
 
-        .human-copy {
-          width: min(330px, 100%);
+      .human-copy {
+        width: min(330px, 100%);
 
-          font-size: 1.18rem;
+        font-size: 1.18rem;
 
-          line-height: 1.6;
-        }
+        line-height: 1.6;
+      }
 
-        /* -----------------------------
+      /* -----------------------------
          QUESTIONS
       ------------------------------ */
 
-        .questions {
-          width: 100%;
+      .questions {
+        width: 100%;
 
-          grid-template-columns: 1fr;
+        grid-template-columns: 1fr;
 
-          gap: 14px;
+        gap: 14px;
 
-          margin-top: 45px;
-        }
+        margin-top: 45px;
+      }
 
-        .question {
-          min-height: auto;
+      .question {
+        min-height: auto;
 
-          padding: 30px 22px;
+        padding:
+          30px
+          22px;
 
-          border-radius: 18px;
-        }
+        border-radius: 18px;
+      }
 
-        .question h3 {
-          font-size: 1.75rem;
-        }
+      .question h3 {
+        font-size: 1.75rem;
+      }
 
-        .question p {
-          font-size: 1.05rem;
-        }
+      .question p {
+        font-size: 1.05rem;
+      }
 
-        /* -----------------------------
+      /* -----------------------------
          FINAL
       ------------------------------ */
 
-        .final {
-          min-height: 75svh;
+      .final {
+        min-height: 75svh;
 
-          padding: 85px 20px;
-        }
-
-        .final h2 {
-          font-size: clamp(4.7rem, 20vw, 7rem);
-
-          line-height: 0.78;
-        }
-
-        .final-small {
-          max-width: 280px;
-
-          line-height: 1.4;
-
-          font-size: 0.52rem;
-        }
-
-        .final p {
-          max-width: 300px;
-
-          font-size: 0.62rem;
-
-          line-height: 1.6;
-        }
-
-        footer {
-          padding: 35px 20px;
-
-          line-height: 1.6;
-        }
+        padding:
+          85px
+          20px;
       }
 
-      /* =========================================================
+      .final h2 {
+        font-size:
+          clamp(
+            4.7rem,
+            20vw,
+            7rem
+          );
+
+        line-height: 0.78;
+      }
+
+      .final-small {
+        max-width: 280px;
+
+        line-height: 1.4;
+
+        font-size: 0.52rem;
+      }
+
+      .final p {
+        max-width: 300px;
+
+        font-size: 0.62rem;
+
+        line-height: 1.6;
+      }
+
+      footer {
+        padding:
+          35px
+          20px;
+
+        line-height: 1.6;
+      }
+    }
+
+    /* =========================================================
        VERY SMALL PHONES
     ========================================================== */
 
-      @media (max-width: 380px) {
-        .hero h1 {
-          font-size: 3.7rem;
-        }
+    @media (max-width: 380px) {
 
-        .hero-subtitle {
-          font-size: 1.15rem;
-        }
-
-        .hero-date {
-          font-size: 2.8rem;
-        }
-
-        .section h2 {
-          font-size: 3rem;
-        }
-
-        .incident-visual {
-          min-height: 380px;
-        }
-
-        .human-word {
-          font-size: 4.8rem;
-        }
+      .hero h1 {
+        font-size: 3.7rem;
       }
 
-      /* =========================================================
+      .hero-subtitle {
+        font-size: 1.15rem;
+      }
+
+      .hero-date {
+        font-size: 2.8rem;
+      }
+
+      .section h2 {
+        font-size: 3rem;
+      }
+
+      .incident-visual {
+        min-height: 380px;
+      }
+
+      .human-word {
+        font-size: 4.8rem;
+      }
+    }
+
+    /* =========================================================
        REDUCED MOTION
     ========================================================== */
 
-      @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-          animation-duration: 0.01ms !important;
+    @media (prefers-reduced-motion: reduce) {
 
-          animation-iteration-count: 1 !important;
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
 
-          scroll-behavior: auto !important;
+        animation-iteration-count: 1 !important;
 
-          transition-duration: 0.01ms !important;
-        }
+        scroll-behavior: auto !important;
+
+        transition-duration: 0.01ms !important;
       }
-    </style>
-  </head>
+    }
 
-  <body>
-    <!-- =======================================================
+  </style>
+</head>
+
+<body>
+
+  <!-- =======================================================
        BACKGROUND
   ======================================================== -->
 
-    <canvas id="three-bg"></canvas>
+  <canvas id="three-bg"></canvas>
 
-    <div class="atmosphere"></div>
-    <div class="smoke"></div>
-    <div class="fire-glow"></div>
+  <div class="atmosphere"></div>
+  <div class="smoke"></div>
+  <div class="fire-glow"></div>
 
-    <div class="embers" id="embers"></div>
+  <div class="embers" id="embers"></div>
 
-    <div class="grain"></div>
-    <div class="cursor-glow"></div>
+  <div class="grain"></div>
+  <div class="cursor-glow"></div>
 
-    <div class="progress" id="progress"></div>
+  <div class="progress" id="progress"></div>
 
-    <!-- =======================================================
+  <!-- =======================================================
        NAV
   ======================================================== -->
 
-    <nav class="nav">
-      <div class="logo">MANIPUR <span>·</span> 2023</div>
+  <nav class="nav">
 
-      <div class="nav-status">
-        <span class="status-dot"></span>
+    <div class="logo">
+      MANIPUR <span>·</span> 2023
+    </div>
 
-        A living documentary
-      </div>
-    </nav>
+    <div class="nav-status">
 
-    <!-- =======================================================
+      <span class="status-dot"></span>
+
+      A living documentary
+
+    </div>
+
+  </nav>
+
+  <!-- =======================================================
        CHAPTER NAVIGATION
   ======================================================== -->
 
-    <div class="chapters">
-      <div
-        class="chapter active"
-        data-target="hero"
-        data-label="Beginning"
-      ></div>
+  <div class="chapters">
 
-      <div class="chapter" data-target="before" data-label="Before"></div>
+    <div
+      class="chapter active"
+      data-target="hero"
+      data-label="Beginning"
+    ></div>
 
-      <div class="chapter" data-target="eruption" data-label="May 3"></div>
+    <div
+      class="chapter"
+      data-target="before"
+      data-label="Before"
+    ></div>
 
-      <div class="chapter" data-target="incident" data-label="May 4"></div>
+    <div
+      class="chapter"
+      data-target="eruption"
+      data-label="May 3"
+    ></div>
 
-      <div class="chapter" data-target="numbers" data-label="The numbers"></div>
+    <div
+      class="chapter"
+      data-target="incident"
+      data-label="May 4"
+    ></div>
 
-      <div class="chapter" data-target="courts" data-label="The courts"></div>
+    <div
+      class="chapter"
+      data-target="numbers"
+      data-label="The numbers"
+    ></div>
 
-      <div class="chapter" data-target="human" data-label="Human cost"></div>
+    <div
+      class="chapter"
+      data-target="courts"
+      data-label="The courts"
+    ></div>
 
-      <div
-        class="chapter"
-        data-target="questions"
-        data-label="Unresolved"
-      ></div>
-    </div>
+    <div
+      class="chapter"
+      data-target="human"
+      data-label="Human cost"
+    ></div>
 
-    <!-- =======================================================
+    <div
+      class="chapter"
+      data-target="questions"
+      data-label="Unresolved"
+    ></div>
+
+  </div>
+
+  <!-- =======================================================
        CONTENT
   ======================================================== -->
 
-    <main>
-      <!-- =====================================================
+  <main>
+
+    <!-- =====================================================
          HERO
     ====================================================== -->
 
-      <section class="hero" id="hero">
-        <div class="container">
-          <div class="hero-inner">
-            <div class="kicker">
-              <span class="kicker-line"></span>
+    <section class="hero" id="hero">
 
-              A documentary about violence, memory & accountability
+      <div class="container">
 
-              <span class="kicker-line"></span>
-            </div>
+        <div class="hero-inner">
 
-            <h1 id="heroTitle">
-              <span class="burn">MANIPUR</span>
-            </h1>
+          <div class="kicker">
 
-            <p class="hero-subtitle">
-              <strong>May 2023.</strong>
+            <span class="kicker-line"></span>
 
-              A state divided. Thousands displaced. A violence whose
-              consequences continue to shape lives.
-            </p>
+            A documentary about violence,
+            memory & accountability
 
-            <div class="hero-date">2023 — 2026</div>
+            <span class="kicker-line"></span>
+
           </div>
+
+          <h1 id="heroTitle">
+            <span class="burn">MANIPUR</span>
+          </h1>
+
+          <p class="hero-subtitle">
+
+            <strong>May 2023.</strong>
+
+            A state divided.
+            Thousands displaced.
+            A violence whose consequences
+            continue to shape lives.
+
+          </p>
+
+          <div class="hero-date">
+            2023 — 2026
+          </div>
+
         </div>
 
-        <div class="scroll-indicator">
-          Scroll to enter
+      </div>
 
-          <span class="scroll-line"></span>
-        </div>
-      </section>
+      <div class="scroll-indicator">
 
-      <!-- =====================================================
+        Scroll to enter
+
+        <span class="scroll-line"></span>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
          BEFORE
     ====================================================== -->
 
-      <section class="section" id="before">
-        <div class="container">
-          <div class="section-number">01 — Before the fire</div>
+    <section class="section" id="before">
 
-          <h2>
-            The fire did not<br />
-            <span>begin in May.</span>
-          </h2>
+      <div class="container">
 
-          <p class="section-intro">
-            The violence of 2023 emerged from decades of ethnic, territorial and
-            political tensions. To understand the explosion, we have to look at
-            what came before it.
-          </p>
-
-          <div class="before-layout">
-            <div>
-              <div class="year">1950s</div>
-
-              <p class="section-intro">
-                Insurgency, militarisation and competing political aspirations
-                begin shaping the modern history of Manipur.
-              </p>
-            </div>
-
-            <div>
-              <div class="event glass">
-                <div class="event-date">1950s — 1980s</div>
-
-                <div class="event-title">Insurgency & militarisation</div>
-
-                <div class="event-text">
-                  Armed movements and the expansion of security forces reshape
-                  everyday life.
-                </div>
-              </div>
-
-              <div class="event glass">
-                <div class="event-date">1990s — 2000s</div>
-
-                <div class="event-title">Land, identity & territory</div>
-
-                <div class="event-text">
-                  Competing claims over land, political representation and
-                  community identity deepen existing fault lines.
-                </div>
-              </div>
-
-              <div class="event glass">
-                <div class="event-date">27 MARCH 2023</div>
-
-                <div class="event-title">The High Court order</div>
-
-                <div class="event-text">
-                  A Manipur High Court order concerning Scheduled Tribe status
-                  becomes a major flashpoint for tribal organisations.
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="section-number">
+          01 — Before the fire
         </div>
-      </section>
 
-      <!-- =====================================================
+        <h2>
+          The fire did not<br />
+          <span>begin in May.</span>
+        </h2>
+
+        <p class="section-intro">
+
+          The violence of 2023 emerged from decades
+          of ethnic, territorial and political tensions.
+          To understand the explosion, we have to look
+          at what came before it.
+
+        </p>
+
+        <div class="before-layout">
+
+          <div>
+
+            <div class="year">
+              1950s
+            </div>
+
+            <p class="section-intro">
+
+              Insurgency, militarisation and competing
+              political aspirations begin shaping the
+              modern history of Manipur.
+
+            </p>
+
+          </div>
+
+
+          <div>
+
+            <div class="event glass">
+
+              <div class="event-date">
+                1950s — 1980s
+              </div>
+
+              <div class="event-title">
+                Insurgency & militarisation
+              </div>
+
+              <div class="event-text">
+
+                Armed movements and the expansion of
+                security forces reshape everyday life.
+
+              </div>
+
+            </div>
+
+
+            <div class="event glass">
+
+              <div class="event-date">
+                1990s — 2000s
+              </div>
+
+              <div class="event-title">
+                Land, identity & territory
+              </div>
+
+              <div class="event-text">
+
+                Competing claims over land, political
+                representation and community identity
+                deepen existing fault lines.
+
+              </div>
+
+            </div>
+
+
+            <div class="event glass">
+
+              <div class="event-date">
+                27 MARCH 2023
+              </div>
+
+              <div class="event-title">
+                The High Court order
+              </div>
+
+              <div class="event-text">
+
+                A Manipur High Court order concerning
+                Scheduled Tribe status becomes a major
+                flashpoint for tribal organisations.
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
          ERUPTION
     ====================================================== -->
 
-      <section class="section eruption" id="eruption">
-        <div class="eruption-number">03</div>
+    <section
+      class="section eruption"
+      id="eruption"
+    >
 
-        <div class="container">
-          <div class="eruption-content">
-            <div class="section-number">02 — The eruption</div>
+      <div class="eruption-number">
+        03
+      </div>
 
-            <div class="date-big">03 MAY 2023</div>
+      <div class="container">
 
-            <h2>
-              Everything<br />
+        <div class="eruption-content">
 
-              <span> caught fire. </span>
-            </h2>
-
-            <p class="section-intro">
-              A tribal solidarity march was followed by clashes that rapidly
-              spread through multiple parts of the state. Homes burned.
-              Communities fled. The conflict became one of India's most
-              devastating episodes of recent ethnic violence.
-            </p>
-
-            <div class="quote">
-              A protest became a confrontation. A confrontation became a
-              conflict. And a conflict became a catastrophe.
-            </div>
+          <div class="section-number">
+            02 — The eruption
           </div>
-        </div>
-      </section>
 
-      <!-- =====================================================
+          <div class="date-big">
+            03 MAY 2023
+          </div>
+
+          <h2>
+
+            Everything<br />
+
+            <span>
+              caught fire.
+            </span>
+
+          </h2>
+
+          <p class="section-intro">
+
+            A tribal solidarity march was followed by
+            clashes that rapidly spread through multiple
+            parts of the state. Homes burned. Communities
+            fled. The conflict became one of India's most
+            devastating episodes of recent ethnic violence.
+
+          </p>
+
+          <div class="quote">
+
+            A protest became a confrontation.
+            A confrontation became a conflict.
+            And a conflict became a catastrophe.
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
          MAY 4 INCIDENT
     ====================================================== -->
 
-      <section class="section incident" id="incident">
-        <div class="container">
-          <div class="incident-grid">
-            <!-- IMAGE PANEL -->
+    <section
+      class="section incident"
+      id="incident"
+    >
 
-            <div class="incident-visual glass">
-              <!--
-              Uses your existing image filename.
+      <div class="container">
 
-              Normal opacity:
-              0.28
+        <div class="incident-grid">
 
-              Hover opacity:
-              0.48
 
-              The image is deliberately never solid.
-            -->
+          <!-- IMAGE PANEL -->
 
-              <img
-                class="incident-image"
-                src="manipur_voilence.webp"
-                alt=""
-                aria-hidden="true"
-              />
+          <div class="incident-visual glass">
 
-              <div class="incident-image-overlay"></div>
+            <img
+              class="incident-image"
+              src="manipur_voilence.webp"
+              alt=""
+              aria-hidden="true"
+            />
 
-              <div class="silhouette"></div>
+            <div class="incident-image-overlay"></div>
 
-              <div class="incident-note">
-                No graphic imagery. The absence is deliberate.
-              </div>
+            <div class="silhouette"></div>
+
+            <div class="incident-note">
+
+              No graphic imagery.
+              The absence is deliberate.
+
             </div>
 
-            <!-- TEXT -->
-
-            <div>
-              <div class="section-number">03 — The image that shook India</div>
-
-              <div class="incident-date">04 MAY</div>
-
-              <h2 class="incident-title">
-                Two women.<br />
-
-                A crowd.<br />
-
-                <span> A nation watching. </span>
-              </h2>
-
-              <p class="incident-text">
-                On 4 May 2023, two Kuki-Zo women were stripped and paraded by a
-                mob in Manipur.
-
-                <br /><br />
-
-                Images of the incident became public weeks later and provoked
-                nationwide outrage. The Supreme Court described the violence
-                against women as deeply disturbing and emphasised that women
-                cannot be used as instruments of violence.
-
-                <br /><br />
-
-                This section intentionally shows no graphic reconstruction. The
-                event does not need spectacle to communicate its horror.
-              </p>
-
-              <div class="warning">
-                <strong> DOCUMENTED INCIDENT </strong>
-
-                <br /><br />
-
-                The incident is part of court proceedings, investigations and
-                extensive independent reporting. Survivors' dignity should
-                remain central to how the event is remembered.
-              </div>
-            </div>
           </div>
-        </div>
-      </section>
 
-      <!-- =====================================================
-         NUMBERS
-    ====================================================== -->
 
-      <section class="section" id="numbers">
-        <div class="container">
-          <div class="section-number">04 — The numbers</div>
+          <!-- TEXT -->
 
-          <h2>
-            Behind every<br />
+          <div>
 
-            <span> number is a life. </span>
-          </h2>
-
-          <p class="section-intro">
-            Official records and independent estimates do not always agree. That
-            difference matters.
-          </p>
-
-          <div class="numbers">
-            <div class="number-card glass">
-              <div class="number orange">6,523</div>
-
-              <div class="number-label">
-                FIRs registered between 3 May and 30 July 2023.
-              </div>
-
-              <div class="source">Supreme Court record</div>
+            <div class="section-number">
+              03 — The image that shook India
             </div>
 
-            <div class="number-card glass">
-              <div class="number">4,454</div>
-
-              <div class="number-label">
-                FIRs involving arson in the period recorded.
-              </div>
-
-              <div class="source">Supreme Court status record</div>
+            <div class="incident-date">
+              04 MAY
             </div>
 
-            <div class="number-card glass">
-              <div class="number">4,148</div>
+            <h2 class="incident-title">
 
-              <div class="number-label">FIRs involving looting.</div>
+              Two women.<br />
 
-              <div class="source">Supreme Court status record</div>
-            </div>
+              A crowd.<br />
 
-            <div class="number-card glass">
-              <div class="number orange">60K+</div>
+              <span>
+                A nation watching.
+              </span>
 
-              <div class="number-label">
-                Displaced people according to independent estimates.
-              </div>
+            </h2>
 
-              <div class="source">NGO / media estimates</div>
-            </div>
+            <p class="incident-text">
 
-            <div class="number-card glass">
-              <div class="number">200+</div>
-
-              <div class="number-label">
-                Relief camps reported during the displacement crisis.
-              </div>
-
-              <div class="source">Government / humanitarian reports</div>
-            </div>
-
-            <div class="number-card glass">
-              <div class="number orange">∞</div>
-
-              <div class="number-label">
-                The number of lives whose stories cannot be reduced to
-                statistics.
-              </div>
-
-              <div class="source">Human testimony</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- =====================================================
-         COURTS
-    ====================================================== -->
-
-      <section class="section" id="courts">
-        <div class="container">
-          <div class="section-number">05 — The courts</div>
-
-          <h2>
-            When the<br />
-
-            <span> courts intervened. </span>
-          </h2>
-
-          <p class="section-intro">
-            Judicial proceedings became an important source of documentation as
-            the crisis unfolded.
-          </p>
-
-          <div class="court-timeline">
-            <div class="court-item glass">
-              <div class="court-date">27 MARCH 2023</div>
-
-              <div class="court-title">Manipur High Court</div>
-
-              <div class="court-text">
-                The High Court issued an order concerning consideration of
-                Scheduled Tribe status for the Meitei community.
-              </div>
-            </div>
-
-            <div class="court-item glass">
-              <div class="court-date">MAY 2023</div>
-
-              <div class="court-title">Supreme Court attention</div>
-
-              <div class="court-text">
-                The Supreme Court began closely examining the situation and
-                sought information about the state's response.
-              </div>
-            </div>
-
-            <div class="court-item glass">
-              <div class="court-date">JULY 2023</div>
-
-              <div class="court-title">Sexual violence condemned</div>
-
-              <div class="court-text">
-                The Court expressed grave concern over the sexual violence
-                against women and emphasised the state's obligation to protect
-                citizens.
-              </div>
-            </div>
-
-            <div class="court-item glass">
-              <div class="court-date">AUGUST 2023</div>
-
-              <div class="court-title">6,523 FIRs recorded</div>
-
-              <div class="court-text">
-                The Court's record documented thousands of FIRs, including cases
-                involving arson and looting.
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- =====================================================
-         HUMAN COST
-    ====================================================== -->
-
-      <section class="section human" id="human">
-        <div class="container">
-          <div class="human-inner">
-            <div class="section-number" style="justify-content: center">
-              06 — The human cost
-            </div>
-
-            <div class="human-word">
-              People<br />
-
-              <span> remember. </span>
-            </div>
-
-            <p class="human-copy">
-              Families who left with almost nothing. Children growing up in
-              relief camps. Villages that no longer look the way they did before
-              May 2023.
+              On 4 May 2023, two Kuki-Zo women
+              were stripped and paraded by a mob
+              in Manipur.
 
               <br /><br />
 
-              There are no statistics capable of describing what it means to
-              lose a home, a neighbour, a place of worship, or the feeling of
-              safety.
-            </p>
-          </div>
-        </div>
-      </section>
+              Images of the incident became public
+              weeks later and provoked nationwide
+              outrage. The Supreme Court described
+              the violence against women as deeply
+              disturbing and emphasised that women
+              cannot be used as instruments of violence.
 
-      <!-- =====================================================
+              <br /><br />
+
+              This section intentionally shows no
+              graphic reconstruction. The event does
+              not need spectacle to communicate its horror.
+
+            </p>
+
+            <div class="warning">
+
+              <strong>
+                DOCUMENTED INCIDENT
+              </strong>
+
+              <br /><br />
+
+              The incident is part of court proceedings,
+              investigations and extensive independent
+              reporting. Survivors' dignity should remain
+              central to how the event is remembered.
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         NUMBERS
+    ====================================================== -->
+
+    <section
+      class="section"
+      id="numbers"
+    >
+
+      <div class="container">
+
+        <div class="section-number">
+          04 — The numbers
+        </div>
+
+        <h2>
+
+          Behind every<br />
+
+          <span>
+            number is a life.
+          </span>
+
+        </h2>
+
+        <p class="section-intro">
+
+          Official records and independent estimates
+          do not always agree. That difference matters.
+
+        </p>
+
+        <div class="numbers">
+
+
+          <div class="number-card glass">
+
+            <div class="number orange">
+              6,523
+            </div>
+
+            <div class="number-label">
+
+              FIRs registered between 3 May and
+              30 July 2023.
+
+            </div>
+
+            <div class="source">
+              Supreme Court record
+            </div>
+
+          </div>
+
+
+          <div class="number-card glass">
+
+            <div class="number">
+              4,454
+            </div>
+
+            <div class="number-label">
+
+              FIRs involving arson in
+              the period recorded.
+
+            </div>
+
+            <div class="source">
+              Supreme Court status record
+            </div>
+
+          </div>
+
+
+          <div class="number-card glass">
+
+            <div class="number">
+              4,148
+            </div>
+
+            <div class="number-label">
+
+              FIRs involving looting.
+
+            </div>
+
+            <div class="source">
+              Supreme Court status record
+            </div>
+
+          </div>
+
+
+          <div class="number-card glass">
+
+            <div class="number orange">
+              60K+
+            </div>
+
+            <div class="number-label">
+
+              Displaced people according to
+              independent estimates.
+
+            </div>
+
+            <div class="source">
+              NGO / media estimates
+            </div>
+
+          </div>
+
+
+          <div class="number-card glass">
+
+            <div class="number">
+              200+
+            </div>
+
+            <div class="number-label">
+
+              Relief camps reported during
+              the displacement crisis.
+
+            </div>
+
+            <div class="source">
+              Government / humanitarian reports
+            </div>
+
+          </div>
+
+
+          <div class="number-card glass">
+
+            <div class="number orange">
+              ∞
+            </div>
+
+            <div class="number-label">
+
+              The number of lives whose stories
+              cannot be reduced to statistics.
+
+            </div>
+
+            <div class="source">
+              Human testimony
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         COURTS
+    ====================================================== -->
+
+    <section
+      class="section"
+      id="courts"
+    >
+
+      <div class="container">
+
+        <div class="section-number">
+          05 — The courts
+        </div>
+
+        <h2>
+
+          When the<br />
+
+          <span>
+            courts intervened.
+          </span>
+
+        </h2>
+
+        <p class="section-intro">
+
+          Judicial proceedings became an important
+          source of documentation as the crisis unfolded.
+
+        </p>
+
+        <div class="court-timeline">
+
+
+          <div class="court-item glass">
+
+            <div class="court-date">
+              27 MARCH 2023
+            </div>
+
+            <div class="court-title">
+              Manipur High Court
+            </div>
+
+            <div class="court-text">
+
+              The High Court issued an order concerning
+              consideration of Scheduled Tribe status
+              for the Meitei community.
+
+            </div>
+
+          </div>
+
+
+          <div class="court-item glass">
+
+            <div class="court-date">
+              MAY 2023
+            </div>
+
+            <div class="court-title">
+              Supreme Court attention
+            </div>
+
+            <div class="court-text">
+
+              The Supreme Court began closely examining
+              the situation and sought information about
+              the state's response.
+
+            </div>
+
+          </div>
+
+
+          <div class="court-item glass">
+
+            <div class="court-date">
+              JULY 2023
+            </div>
+
+            <div class="court-title">
+              Sexual violence condemned
+            </div>
+
+            <div class="court-text">
+
+              The Court expressed grave concern over
+              the sexual violence against women and
+              emphasised the state's obligation to
+              protect citizens.
+
+            </div>
+
+          </div>
+
+
+          <div class="court-item glass">
+
+            <div class="court-date">
+              AUGUST 2023
+            </div>
+
+            <div class="court-title">
+              6,523 FIRs recorded
+            </div>
+
+            <div class="court-text">
+
+              The Court's record documented thousands
+              of FIRs, including cases involving arson
+              and looting.
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         HUMAN COST
+    ====================================================== -->
+
+    <section
+      class="section human"
+      id="human"
+    >
+
+      <div class="container">
+
+        <div class="human-inner">
+
+          <div
+            class="section-number"
+            style="justify-content:center"
+          >
+            06 — The human cost
+          </div>
+
+          <div class="human-word">
+
+            People<br />
+
+            <span>
+              remember.
+            </span>
+
+          </div>
+
+          <p class="human-copy">
+
+            Families who left with almost nothing.
+            Children growing up in relief camps.
+            Villages that no longer look the way they
+            did before May 2023.
+
+            <br /><br />
+
+            There are no statistics capable of describing
+            what it means to lose a home, a neighbour,
+            a place of worship, or the feeling of safety.
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
          QUESTIONS
     ====================================================== -->
 
-      <section class="section" id="questions">
-        <div class="container">
-          <div class="section-number">07 — Unresolved</div>
+    <section
+      class="section"
+      id="questions"
+    >
 
-          <h2>
-            The story<br />
+      <div class="container">
 
-            <span> is not finished. </span>
-          </h2>
-
-          <p class="section-intro">
-            The most important part of a documentary may be what it refuses to
-            pretend is settled.
-          </p>
-
-          <div class="questions">
-            <div class="question glass">
-              <div class="q-number">QUESTION 01</div>
-
-              <h3>What happened to the investigations?</h3>
-
-              <p>
-                Thousands of cases entered the criminal justice system. The pace
-                and outcome of investigations remain a central question.
-              </p>
-            </div>
-
-            <div class="question glass">
-              <div class="q-number">QUESTION 02</div>
-
-              <h3>How many people remain displaced?</h3>
-
-              <p>
-                Official and independent estimates differ. Rehabilitation and
-                return remain major challenges.
-              </p>
-            </div>
-
-            <div class="question glass">
-              <div class="q-number">QUESTION 03</div>
-
-              <h3>Who answers for institutional failures?</h3>
-
-              <p>
-                The violence raised difficult questions about administration,
-                policing, political leadership and accountability.
-              </p>
-            </div>
-
-            <div class="question glass">
-              <div class="q-number">QUESTION 04</div>
-
-              <h3>Can the communities live together again?</h3>
-
-              <p>
-                Beyond immediate security, the harder question concerns
-                reconciliation, trust, land and the future of Manipur.
-              </p>
-            </div>
-          </div>
+        <div class="section-number">
+          07 — Unresolved
         </div>
-      </section>
 
-      <!-- =====================================================
+        <h2>
+
+          The story<br />
+
+          <span>
+            is not finished.
+          </span>
+
+        </h2>
+
+        <p class="section-intro">
+
+          The most important part of a documentary
+          may be what it refuses to pretend is settled.
+
+        </p>
+
+        <div class="questions">
+
+
+          <div class="question glass">
+
+            <div class="q-number">
+              QUESTION 01
+            </div>
+
+            <h3>
+              What happened to the investigations?
+            </h3>
+
+            <p>
+
+              Thousands of cases entered the criminal
+              justice system. The pace and outcome of
+              investigations remain a central question.
+
+            </p>
+
+          </div>
+
+
+          <div class="question glass">
+
+            <div class="q-number">
+              QUESTION 02
+            </div>
+
+            <h3>
+              How many people remain displaced?
+            </h3>
+
+            <p>
+
+              Official and independent estimates differ.
+              Rehabilitation and return remain major
+              challenges.
+
+            </p>
+
+          </div>
+
+
+          <div class="question glass">
+
+            <div class="q-number">
+              QUESTION 03
+            </div>
+
+            <h3>
+              Who answers for institutional failures?
+            </h3>
+
+            <p>
+
+              The violence raised difficult questions
+              about administration, policing, political
+              leadership and accountability.
+
+            </p>
+
+          </div>
+
+
+          <div class="question glass">
+
+            <div class="q-number">
+              QUESTION 04
+            </div>
+
+            <h3>
+              Can the communities live together again?
+            </h3>
+
+            <p>
+
+              Beyond immediate security, the harder
+              question concerns reconciliation, trust,
+              land and the future of Manipur.
+
+            </p>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
          FINAL
     ====================================================== -->
 
-      <section class="final">
-        <div class="final-content">
-          <div class="final-small">A documentary is not an answer</div>
+    <section class="final">
 
-          <h2>
-            Remember<br />
+      <div class="final-content">
 
-            <span> what happened. </span>
-          </h2>
-
-          <div class="final-line"></div>
-
-          <p>LOOK · QUESTION · REMEMBER · DEMAND ACCOUNTABILITY</p>
+        <div class="final-small">
+          A documentary is not an answer
         </div>
-      </section>
-    </main>
 
-    <!-- =======================================================
+        <h2>
+
+          Remember<br />
+
+          <span>
+            what happened.
+          </span>
+
+        </h2>
+
+        <div class="final-line"></div>
+
+        <p>
+          LOOK · QUESTION · REMEMBER · DEMAND ACCOUNTABILITY
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =======================================================
        FOOTER
   ======================================================== -->
 
-    <footer>MANIPUR · A LIVING DOCUMENTARY · 2026</footer>
+  <footer>
+    MANIPUR · A LIVING DOCUMENTARY · 2026
+  </footer>
 
-    <!-- =======================================================
+
+  <!-- =======================================================
        THREE.JS
   ======================================================== -->
 
-    <script>
-      /*
+  <script>
+
+    /*
       ==========================================================
       THREE.JS ASH / EMBER PARTICLES
-
-      This is intentionally NOT a generic rotating point cloud.
-
-      Particles:
-      - rise slowly
-      - drift horizontally
-      - have different sizes
-      - have different brightness
-      - have different warm colors
-      - occasionally glow like tiny embers
-      - are concentrated around the lower/fire region
-      - remain subtle around the typography
     ==========================================================
     */
 
-      const canvas = document.getElementById("three-bg");
+    const canvas =
+      document.getElementById("three-bg");
 
-      let threeReady = false;
+    let threeReady = false;
 
-      let scene;
-      let camera;
-      let renderer;
-      let particles;
+    let scene;
+    let camera;
+    let renderer;
+    let particles;
 
-      let particlePositions;
-      let particleVelocity;
-      let particleDrift;
-      let particleLife;
-      let particleAlpha;
+    let particlePositions;
+    let particleVelocity;
+    let particleDrift;
+    let particleLife;
+    let particleAlpha;
 
-      let mouseX = 0;
-      let mouseY = 0;
+    let mouseX = 0;
+    let mouseY = 0;
 
-      function loadThree() {
-        const script = document.createElement("script");
+    function loadThree() {
 
-        script.src =
-          "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+      const script =
+        document.createElement("script");
 
-        script.onload = initThree;
+      script.src =
+        "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
 
-        script.onerror = () => {
-          console.warn(
-            "Three.js could not load. CSS ember fallback remains active.",
-          );
-        };
+      script.onload = initThree;
 
-        document.head.appendChild(script);
-      }
+      script.onerror = () => {
 
-      function initThree() {
-        if (typeof THREE === "undefined") {
-          return;
-        }
-
-        threeReady = true;
-
-        scene = new THREE.Scene();
-
-        camera = new THREE.PerspectiveCamera(
-          55,
-          window.innerWidth / window.innerHeight,
-          0.1,
-          100,
+        console.warn(
+          "Three.js could not load. CSS ember fallback remains active."
         );
 
-        camera.position.z = 7;
+      };
 
-        renderer = new THREE.WebGLRenderer({
+      document.head.appendChild(script);
+    }
+
+
+    function initThree() {
+
+      if (typeof THREE === "undefined") {
+        return;
+      }
+
+      threeReady = true;
+
+      scene =
+        new THREE.Scene();
+
+
+      camera =
+        new THREE.PerspectiveCamera(
+          55,
+          window.innerWidth /
+            window.innerHeight,
+          0.1,
+          100
+        );
+
+      camera.position.z = 7;
+
+
+      renderer =
+        new THREE.WebGLRenderer({
           canvas,
           alpha: true,
           antialias: true,
-          powerPreference: "high-performance",
+          powerPreference: "high-performance"
         });
 
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
 
-        renderer.setSize(window.innerWidth, window.innerHeight, false);
+      renderer.setPixelRatio(
+        Math.min(
+          window.devicePixelRatio || 1,
+          1.75
+        )
+      );
 
-        renderer.setClearColor(0x000000, 0);
 
-        /*
-        Fewer particles on small screens.
-        Still enough to retain the visual identity.
-      */
+      renderer.setSize(
+        window.innerWidth,
+        window.innerHeight,
+        false
+      );
 
-        const mobile = window.innerWidth < 700;
 
-        const count = mobile ? 1050 : 2200;
+      renderer.setClearColor(
+        0x000000,
+        0
+      );
 
-        const geometry = new THREE.BufferGeometry();
 
-        particlePositions = new Float32Array(count * 3);
+      const mobile =
+        window.innerWidth < 700;
 
-        particleVelocity = new Float32Array(count);
+      const count =
+        mobile
+          ? 1050
+          : 2200;
 
-        particleDrift = new Float32Array(count);
 
-        particleLife = new Float32Array(count);
+      const geometry =
+        new THREE.BufferGeometry();
 
-        particleAlpha = new Float32Array(count);
 
-        const colors = new Float32Array(count * 3);
+      particlePositions =
+        new Float32Array(
+          count * 3
+        );
 
-        const sizes = new Float32Array(count);
+      particleVelocity =
+        new Float32Array(
+          count
+        );
 
-        for (let i = 0; i < count; i++) {
-          const i3 = i * 3;
+      particleDrift =
+        new Float32Array(
+          count
+        );
 
-          /*
-          Spread across the viewport.
-        */
+      particleLife =
+        new Float32Array(
+          count
+        );
 
-          particlePositions[i3] = (Math.random() - 0.5) * 15;
+      particleAlpha =
+        new Float32Array(
+          count
+        );
 
-          particlePositions[i3 + 1] = (Math.random() - 0.5) * 10.5;
+      const colors =
+        new Float32Array(
+          count * 3
+        );
 
-          particlePositions[i3 + 2] = (Math.random() - 0.5) * 8;
+      const sizes =
+        new Float32Array(
+          count
+        );
 
-          /*
-          Slightly more downward particles
-          because embers originate around the
-          lower warm region.
-        */
 
-          if (Math.random() < 0.32) {
-            particlePositions[i3 + 1] -= Math.random() * 3.5;
-          }
+      for (
+        let i = 0;
+        i < count;
+        i++
+      ) {
 
-          /*
-          Slow vertical movement.
-        */
+        const i3 =
+          i * 3;
 
-          particleVelocity[i] = 0.00055 + Math.random() * 0.00155;
 
-          /*
-          Individual horizontal drift.
-        */
+        particlePositions[i3] =
+          (Math.random() - 0.5) *
+          15;
 
-          particleDrift[i] = (Math.random() - 0.5) * 0.0018;
+        particlePositions[i3 + 1] =
+          (Math.random() - 0.5) *
+          10.5;
 
-          /*
-          Life is staggered so particles
-          don't move together.
-        */
+        particlePositions[i3 + 2] =
+          (Math.random() - 0.5) *
+          8;
 
-          particleLife[i] = Math.random() * Math.PI * 2;
 
-          /*
-          Individual opacity.
-        */
+        if (
+          Math.random() <
+          0.32
+        ) {
 
-          particleAlpha[i] = 0.18 + Math.random() * 0.65;
+          particlePositions[i3 + 1] -=
+            Math.random() * 3.5;
 
-          /*
-          IMPORTANT:
-
-          Most particles are tiny ash.
-          A small percentage become hotter,
-          larger ember fragments.
-        */
-
-          const emberChance = Math.random();
-
-          if (emberChance > 0.965) {
-            sizes[i] = 4.0 + Math.random() * 5.0;
-
-            colors[i3] = 1.0;
-
-            colors[i3 + 1] = 0.2 + Math.random() * 0.25;
-
-            colors[i3 + 2] = 0.03;
-
-            particleAlpha[i] = 0.65 + Math.random() * 0.35;
-          } else if (emberChance > 0.82) {
-            sizes[i] = 2.2 + Math.random() * 2.8;
-
-            colors[i3] = 1.0;
-
-            colors[i3 + 1] = 0.1 + Math.random() * 0.28;
-
-            colors[i3 + 2] = 0.025;
-          } else {
-            sizes[i] = 0.8 + Math.random() * 2.0;
-
-            /*
-            Slightly dirty warm ash.
-          */
-
-            const ash = Math.random();
-
-            colors[i3] = 0.48 + ash * 0.42;
-
-            colors[i3 + 1] = 0.15 + ash * 0.18;
-
-            colors[i3 + 2] = 0.06 + ash * 0.06;
-          }
         }
 
-        geometry.setAttribute(
-          "position",
-          new THREE.BufferAttribute(particlePositions, 3),
-        );
 
-        geometry.setAttribute("aSize", new THREE.BufferAttribute(sizes, 1));
+        particleVelocity[i] =
+          0.00055 +
+          Math.random() * 0.00155;
 
-        geometry.setAttribute("aColor", new THREE.BufferAttribute(colors, 3));
 
-        geometry.setAttribute(
-          "aAlpha",
-          new THREE.BufferAttribute(particleAlpha, 1),
-        );
+        particleDrift[i] =
+          (Math.random() - 0.5) *
+          0.0018;
 
-        /*
-        Custom shader lets every particle
-        have its own size and brightness.
-      */
 
-        const material = new THREE.ShaderMaterial({
+        particleLife[i] =
+          Math.random() *
+          Math.PI *
+          2;
+
+
+        particleAlpha[i] =
+          0.18 +
+          Math.random() *
+          0.65;
+
+
+        const emberChance =
+          Math.random();
+
+        if (
+          emberChance >
+          0.965
+        ) {
+
+          sizes[i] =
+            4.0 +
+            Math.random() *
+            5.0;
+
+          colors[i3] =
+            1.0;
+
+          colors[i3 + 1] =
+            0.20 +
+            Math.random() *
+            0.25;
+
+          colors[i3 + 2] =
+            0.03;
+
+          particleAlpha[i] =
+            0.65 +
+            Math.random() *
+            0.35;
+
+        } else if (
+          emberChance >
+          0.82
+        ) {
+
+          sizes[i] =
+            2.2 +
+            Math.random() *
+            2.8;
+
+          colors[i3] =
+            1.0;
+
+          colors[i3 + 1] =
+            0.10 +
+            Math.random() *
+            0.28;
+
+          colors[i3 + 2] =
+            0.025;
+
+        } else {
+
+          sizes[i] =
+            0.8 +
+            Math.random() *
+            2.0;
+
+          const ash =
+            Math.random();
+
+          colors[i3] =
+            0.48 +
+            ash * 0.42;
+
+          colors[i3 + 1] =
+            0.15 +
+            ash * 0.18;
+
+          colors[i3 + 2] =
+            0.06 +
+            ash * 0.06;
+
+        }
+      }
+
+
+      geometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(
+          particlePositions,
+          3
+        )
+      );
+
+
+      geometry.setAttribute(
+        "aSize",
+        new THREE.BufferAttribute(
+          sizes,
+          1
+        )
+      );
+
+
+      geometry.setAttribute(
+        "aColor",
+        new THREE.BufferAttribute(
+          colors,
+          3
+        )
+      );
+
+
+      geometry.setAttribute(
+        "aAlpha",
+        new THREE.BufferAttribute(
+          particleAlpha,
+          1
+        )
+      );
+
+
+      const material =
+        new THREE.ShaderMaterial({
+
           transparent: true,
 
           depthWrite: false,
 
-          blending: THREE.AdditiveBlending,
+          blending:
+            THREE.AdditiveBlending,
 
           uniforms: {
             uPixelRatio: {
-              value: Math.min(window.devicePixelRatio || 1, 1.75),
-            },
+              value:
+                Math.min(
+                  window.devicePixelRatio || 1,
+                  1.75
+                )
+            }
           },
 
           vertexShader: `
@@ -3274,10 +4218,6 @@
               vec4 mvPosition =
                 modelViewMatrix *
                 vec4(position, 1.0);
-
-              /*
-                Perspective scaling.
-              */
 
               gl_PointSize =
                 aSize *
@@ -3305,10 +4245,6 @@
 
             void main() {
 
-              /*
-                Soft circular particle.
-              */
-
               vec2 uv =
                 gl_PointCoord -
                 vec2(0.5);
@@ -3323,11 +4259,6 @@
                   0.5,
                   distanceFromCenter
                 );
-
-              /*
-                Slightly square/irregular feeling
-                rather than perfect UI dots.
-              */
 
               float edge =
                 1.0 -
@@ -3359,315 +4290,615 @@
 
             }
 
-          `,
+          `
         });
 
-        particles = new THREE.Points(geometry, material);
 
-        scene.add(particles);
+      particles =
+        new THREE.Points(
+          geometry,
+          material
+        );
 
-        animateThree();
+
+      scene.add(
+        particles
+      );
+
+
+      animateThree();
+    }
+
+
+    function animateThree() {
+
+      if (!threeReady) {
+        return;
       }
 
-      function animateThree() {
+      requestAnimationFrame(
+        animateThree
+      );
+
+
+      const now =
+        performance.now();
+
+
+      const time =
+        now * 0.0001;
+
+
+      const positions =
+        particles.geometry
+          .attributes
+          .position
+          .array;
+
+
+      const count =
+        positions.length / 3;
+
+
+      for (
+        let i = 0;
+        i < count;
+        i++
+      ) {
+
+        const i3 =
+          i * 3;
+
+
+        positions[i3 + 1] +=
+          particleVelocity[i];
+
+
+        positions[i3] +=
+          particleDrift[i] +
+          Math.sin(
+            time * 3 +
+            particleLife[i]
+          ) *
+          0.00055;
+
+
+        positions[i3] +=
+          Math.sin(
+            time * 1.7 +
+            particleLife[i] * 2.1
+          ) *
+          0.0003;
+
+
+        if (
+          positions[i3 + 1] >
+          6.0
+        ) {
+
+          positions[i3 + 1] =
+            -6.0 -
+            Math.random() * 2.5;
+
+          positions[i3] =
+            (Math.random() - 0.5) *
+            15;
+
+          positions[i3 + 2] =
+            (Math.random() - 0.5) *
+            8;
+
+          particleLife[i] =
+            Math.random() *
+            Math.PI *
+            2;
+
+        }
+      }
+
+
+      particles.geometry
+        .attributes
+        .position
+        .needsUpdate = true;
+
+
+      const targetX =
+        mouseX * 0.22;
+
+      const targetY =
+        -mouseY * 0.12;
+
+
+      particles.position.x +=
+        (
+          targetX -
+          particles.position.x
+        ) * 0.008;
+
+
+      particles.position.y +=
+        (
+          targetY -
+          particles.position.y
+        ) * 0.008;
+
+
+      renderer.render(
+        scene,
+        camera
+      );
+    }
+
+
+    /* =========================================================
+       RESIZE
+    ========================================================== */
+
+    window.addEventListener(
+      "resize",
+      () => {
+
         if (!threeReady) {
           return;
         }
 
-        requestAnimationFrame(animateThree);
+        camera.aspect =
+          window.innerWidth /
+          window.innerHeight;
 
-        const now = performance.now();
+        camera.updateProjectionMatrix();
 
-        const time = now * 0.0001;
 
-        const positions = particles.geometry.attributes.position.array;
+        renderer.setPixelRatio(
+          Math.min(
+            window.devicePixelRatio || 1,
+            1.75
+          )
+        );
 
-        const count = positions.length / 3;
 
-        for (let i = 0; i < count; i++) {
-          const i3 = i * 3;
+        renderer.setSize(
+          window.innerWidth,
+          window.innerHeight,
+          false
+        );
 
-          /*
-          Vertical rise.
-
-          Different speeds make the field
-          feel organic rather than synchronized.
-        */
-
-          positions[i3 + 1] += particleVelocity[i];
-
-          /*
-          Gentle horizontal turbulence.
-        */
-
-          positions[i3] +=
-            particleDrift[i] + Math.sin(time * 3 + particleLife[i]) * 0.00055;
-
-          positions[i3] +=
-            Math.sin(time * 1.7 + particleLife[i] * 2.1) * 0.0003;
-
-          /*
-          Recycle particles once they leave
-          the upper frame.
-        */
-
-          if (positions[i3 + 1] > 6.0) {
-            positions[i3 + 1] = -6.0 - Math.random() * 2.5;
-
-            positions[i3] = (Math.random() - 0.5) * 15;
-
-            positions[i3 + 2] = (Math.random() - 0.5) * 8;
-
-            particleLife[i] = Math.random() * Math.PI * 2;
-          }
-        }
-
-        particles.geometry.attributes.position.needsUpdate = true;
-
-        /*
-        Very subtle mouse movement.
-
-        The particles themselves move,
-        rather than the whole background
-        being rotated aggressively.
-      */
-
-        const targetX = mouseX * 0.22;
-
-        const targetY = -mouseY * 0.12;
-
-        particles.position.x += (targetX - particles.position.x) * 0.008;
-
-        particles.position.y += (targetY - particles.position.y) * 0.008;
-
-        renderer.render(scene, camera);
+      },
+      {
+        passive: true
       }
+    );
 
-      /* =========================================================
-       RESIZE
-    ========================================================== */
 
-      window.addEventListener(
-        "resize",
-        () => {
-          if (!threeReady) {
-            return;
-          }
-
-          camera.aspect = window.innerWidth / window.innerHeight;
-
-          camera.updateProjectionMatrix();
-
-          renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
-
-          renderer.setSize(window.innerWidth, window.innerHeight, false);
-        },
-        {
-          passive: true,
-        },
-      );
-
-      /* =========================================================
+    /* =========================================================
        MOUSE
     ========================================================== */
 
-      const cursor = document.querySelector(".cursor-glow");
-
-      window.addEventListener(
-        "mousemove",
-        (e) => {
-          mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-
-          mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-
-          if (cursor) {
-            cursor.style.left = e.clientX + "px";
-
-            cursor.style.top = e.clientY + "px";
-          }
-
-          const hero = document.getElementById("heroTitle");
-
-          /*
-          Keep the hero movement very subtle.
-        */
-
-          if (hero) {
-            const x = (e.clientX / window.innerWidth - 0.5) * 7;
-
-            const y = (e.clientY / window.innerHeight - 0.5) * 4;
-
-            hero.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-          }
-        },
-        {
-          passive: true,
-        },
+    const cursor =
+      document.querySelector(
+        ".cursor-glow"
       );
 
-      /* =========================================================
+
+    window.addEventListener(
+      "mousemove",
+      (e) => {
+
+        mouseX =
+          (
+            e.clientX /
+            window.innerWidth -
+            0.5
+          ) * 2;
+
+
+        mouseY =
+          (
+            e.clientY /
+            window.innerHeight -
+            0.5
+          ) * 2;
+
+
+        if (cursor) {
+
+          cursor.style.left =
+            e.clientX + "px";
+
+          cursor.style.top =
+            e.clientY + "px";
+
+        }
+
+
+        const hero =
+          document.getElementById(
+            "heroTitle"
+          );
+
+
+        if (hero) {
+
+          const x =
+            (
+              e.clientX /
+              window.innerWidth -
+              0.5
+            ) * 7;
+
+
+          const y =
+            (
+              e.clientY /
+              window.innerHeight -
+              0.5
+            ) * 4;
+
+
+          hero.style.transform =
+            `translate3d(${x}px, ${y}px, 0)`;
+
+        }
+
+      },
+      {
+        passive: true
+      }
+    );
+
+
+    /* =========================================================
        CSS EMBERS BACKUP
     ========================================================== */
 
-      const emberContainer = document.getElementById("embers");
+    const emberContainer =
+      document.getElementById(
+        "embers"
+      );
 
-      for (let i = 0; i < 70; i++) {
-        const ember = document.createElement("span");
 
-        ember.className = "ember";
+    for (
+      let i = 0;
+      i < 70;
+      i++
+    ) {
 
-        ember.style.left = Math.random() * 100 + "%";
+      const ember =
+        document.createElement(
+          "span"
+        );
 
-        ember.style.animationDuration = 5 + Math.random() * 9 + "s";
 
-        ember.style.animationDelay = -Math.random() * 12 + "s";
+      ember.className =
+        "ember";
 
-        ember.style.setProperty("--drift", (Math.random() - 0.5) * 180 + "px");
 
-        const size = Math.random() * 3 + 1;
+      ember.style.left =
+        Math.random() * 100 +
+        "%";
 
-        ember.style.width = size + "px";
 
-        ember.style.height = size + "px";
+      ember.style.animationDuration =
+        5 +
+        Math.random() * 9 +
+        "s";
 
-        emberContainer.appendChild(ember);
-      }
 
-      /* =========================================================
+      ember.style.animationDelay =
+        -Math.random() * 12 +
+        "s";
+
+
+      ember.style.setProperty(
+        "--drift",
+        (
+          Math.random() -
+          0.5
+        ) *
+        180 +
+        "px"
+      );
+
+
+      const size =
+        Math.random() * 3 +
+        1;
+
+
+      ember.style.width =
+        size + "px";
+
+
+      ember.style.height =
+        size + "px";
+
+
+      emberContainer.appendChild(
+        ember
+      );
+
+    }
+
+
+    /* =========================================================
        SCROLL PROGRESS
     ========================================================== */
 
-      const progress = document.getElementById("progress");
+    const progress =
+      document.getElementById(
+        "progress"
+      );
 
-      function updateProgress() {
-        const scrollTop = window.scrollY;
 
-        const height =
-          document.documentElement.scrollHeight - window.innerHeight;
+    function updateProgress() {
 
-        const percentage = height > 0 ? (scrollTop / height) * 100 : 0;
+      const scrollTop =
+        window.scrollY;
 
-        progress.style.width = percentage + "%";
+
+      const height =
+        document.documentElement
+          .scrollHeight -
+        window.innerHeight;
+
+
+      const percentage =
+        height > 0
+          ? (
+              scrollTop /
+              height
+            ) * 100
+          : 0;
+
+
+      progress.style.width =
+        percentage + "%";
+    }
+
+
+    window.addEventListener(
+      "scroll",
+      updateProgress,
+      {
+        passive: true
       }
+    );
 
-      window.addEventListener("scroll", updateProgress, {
-        passive: true,
-      });
 
-      /* =========================================================
+    /* =========================================================
        SECTION REVEAL
     ========================================================== */
 
-      const sections = document.querySelectorAll(".section");
-
-      const revealObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-            }
-          });
-        },
-        {
-          threshold: 0.08,
-        },
+    const sections =
+      document.querySelectorAll(
+        ".section"
       );
 
-      sections.forEach((section) => {
-        revealObserver.observe(section);
-      });
 
-      /*
-      Hero is visible immediately.
-    */
+    const revealObserver =
+      new IntersectionObserver(
+        (entries) => {
 
-      document.getElementById("hero")?.classList.add("visible");
+          entries.forEach(
+            (entry) => {
 
-      /* =========================================================
+              if (
+                entry.isIntersecting
+              ) {
+
+                entry.target
+                  .classList
+                  .add("visible");
+
+              }
+
+            }
+          );
+
+        },
+        {
+          threshold: 0.08
+        }
+      );
+
+
+    sections.forEach(
+      (section) => {
+
+        revealObserver.observe(
+          section
+        );
+
+      }
+    );
+
+
+    document
+      .getElementById("hero")
+      ?.classList
+      .add("visible");
+
+
+    /* =========================================================
        CHAPTER NAVIGATION
     ========================================================== */
 
-      const chapterButtons = document.querySelectorAll(".chapter");
+    const chapterButtons =
+      document.querySelectorAll(
+        ".chapter"
+      );
 
-      chapterButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          const target = document.getElementById(button.dataset.target);
 
-          if (target) {
-            target.scrollIntoView({
-              behavior: "smooth",
-              block: "center",
-            });
+    chapterButtons.forEach(
+      (button) => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const target =
+              document.getElementById(
+                button.dataset.target
+              );
+
+
+            if (target) {
+
+              target.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+              });
+
+            }
+
           }
-        });
-      });
+        );
 
-      /* =========================================================
+      }
+    );
+
+
+    /* =========================================================
        ACTIVE CHAPTER
     ========================================================== */
 
-      const chapterObserver = new IntersectionObserver(
+    const chapterObserver =
+      new IntersectionObserver(
         (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              chapterButtons.forEach((button) => {
-                button.classList.toggle(
-                  "active",
-                  button.dataset.target === entry.target.id,
+
+          entries.forEach(
+            (entry) => {
+
+              if (
+                entry.isIntersecting
+              ) {
+
+                chapterButtons.forEach(
+                  (button) => {
+
+                    button.classList.toggle(
+                      "active",
+                      button.dataset.target ===
+                        entry.target.id
+                    );
+
+                  }
                 );
-              });
+
+              }
+
             }
-          });
+          );
+
         },
         {
-          threshold: 0.35,
-        },
+          threshold: 0.35
+        }
       );
 
-      document.querySelectorAll("#hero,.section").forEach((section) => {
-        chapterObserver.observe(section);
-      });
 
-      /* =========================================================
+    document
+      .querySelectorAll(
+        "#hero,.section"
+      )
+      .forEach(
+        (section) => {
+
+          chapterObserver.observe(
+            section
+          );
+
+        }
+      );
+
+
+    /* =========================================================
        GLASS CARD TILT
     ========================================================== */
 
-      document.querySelectorAll(".glass").forEach((card) => {
-        card.addEventListener("mousemove", (e) => {
-          if (window.innerWidth < 800) {
-            return;
-          }
+    document
+      .querySelectorAll(".glass")
+      .forEach(
+        (card) => {
 
-          const rect = card.getBoundingClientRect();
+          card.addEventListener(
+            "mousemove",
+            (e) => {
 
-          const x = e.clientX - rect.left;
+              if (
+                window.innerWidth <
+                800
+              ) {
+                return;
+              }
 
-          const y = e.clientY - rect.top;
 
-          const rotateY = (x / rect.width - 0.5) * 3;
+              const rect =
+                card.getBoundingClientRect();
 
-          const rotateX = (y / rect.height - 0.5) * -3;
 
-          card.style.transform = `
+              const x =
+                e.clientX -
+                rect.left;
+
+
+              const y =
+                e.clientY -
+                rect.top;
+
+
+              const rotateY =
+                (
+                  x /
+                  rect.width -
+                  0.5
+                ) * 3;
+
+
+              const rotateX =
+                (
+                  y /
+                  rect.height -
+                  0.5
+                ) * -3;
+
+
+              card.style.transform =
+                `
                   perspective(900px)
                   rotateX(${rotateX}deg)
                   rotateY(${rotateY}deg)
                   translateY(-5px)
                 `;
-        });
 
-        card.addEventListener("mouseleave", () => {
-          card.style.transform = "";
-        });
-      });
+            }
+          );
 
-      /* =========================================================
+
+          card.addEventListener(
+            "mouseleave",
+            () => {
+
+              card.style.transform =
+                "";
+
+            }
+          );
+
+        }
+      );
+
+
+    /* =========================================================
        INITIALISE
     ========================================================== */
 
-      loadThree();
+    loadThree();
 
-      updateProgress();
-    </script>
-  </body>
+    updateProgress();
+
+  </script>
+
+</body>
 </html>
